@@ -111,8 +111,14 @@
 \pagestyle{empty}
 \setcounter{savepage}{\thepage}
 \input{front/signature}
+% Once you have your thesis signed, scan/save it as `signed.pdf' in the `front` folder, and uncomment below.
+% \includepdf[pages={1}]{front/signed.pdf}
 \cleardoublepage
-% \section*{Acknowledgments}
+
+\section*{Acknowledgments}
+\begin{CJK}{UTF8}{nanummj}
+\input{front/acknowldgment}
+\end{CJK}
 
 % TBD
 
