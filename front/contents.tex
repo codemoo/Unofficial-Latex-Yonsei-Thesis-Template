@@ -4,11 +4,15 @@
 %% these files by simply taking out the appropriate command.  For more
 %% information on these files, see appendix C.3.3 of the LaTeX manual. 
 
-\renewcommand{\contentsname}{Table of Contents}
+% Yonsei 2026 spec: heading is uppercase "TABLE OF CONTENTS"; List of
+% Figures / List of Tables / Abstract appear as TOC entries.
+\renewcommand{\contentsname}{TABLE OF CONTENTS}
 \tableofcontents
 \newpage
+\addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures
 \newpage
+\addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
 
 

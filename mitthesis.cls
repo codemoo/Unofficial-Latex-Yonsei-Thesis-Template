@@ -224,11 +224,13 @@
 %	into 1in margin.
 %  Draft mode brings the header back down.
 
-\setlength{\oddsidemargin}{0.4in}	% 1.4in left margin 
-\setlength{\evensidemargin}{0.4in}	% 1.4in left margin (even pages)
-\setlength{\topmargin}{1.2in}		% 1in top margin
-\setlength{\textwidth}{5.45in}		% 6.0in text - 1.25in rt margin
-\setlength{\textheight}{7.4in}		% Body ht for 1in margins
+% Yonsei 2026 spec: A4, top/bottom 5.3cm, left/right 3.5cm.
+% Default LaTeX adds 1in to oddsidemargin and topmargin.
+\setlength{\oddsidemargin}{0.378in}	% L = 1in + 0.378in = 3.50cm
+\setlength{\evensidemargin}{0.378in}	% L = 1in + 0.378in = 3.50cm
+\setlength{\topmargin}{1.087in}		% top = 1in + 1.087in = 5.30cm
+\setlength{\textwidth}{5.512in}		% 14.0cm  -> right margin 3.50cm
+\setlength{\textheight}{7.520in}	% 19.1cm -> bottom margin 5.30cm
 \addtolength{\topmargin}{-\headheight}	% No header, so compensate
 \addtolength{\topmargin}{-\headsep}	% for header height and separation
 
@@ -436,143 +438,108 @@ reserved.\par\permission}}
 % we build the appropriate boxes for the titlepage and
 % the abstractpage as the user makes multiple calls
 % to \supervisor
-\newbox\@titlesupervisor 	\newbox\@abstractsupervisor
+% Accumulate the middle-dot separated advisor list shown on the Title page
+% per Yonsei 2026 spec ("Advisor : Name1·Name2·..."). The MIT-style
+% "Certified by" supervisor boxes were dropped as dead code.
+\let\@advisornames\@empty
+\newif\if@firstadvisor \@firstadvisortrue
 
-\def\supervisor#1#2{\setbox\@titlesupervisor\vbox
-  {\unvbox\@titlesupervisor \vskip 10pt% plus 1fil minus 1fil
-  \def\baselinestretch{1}\large
-  \signature{Certified by}{#1 \\ #2 \\ Thesis Supervisor}}
-  \setbox\@abstractsupervisor\vbox{\unvbox\@abstractsupervisor
-  \vskip\baselineskip \def\baselinestretch{1}\@normalsize 
-  \par\noindent Thesis Supervisor: #1 \\ Title: #2}}
+\def\supervisor#1#2{%
+  \if@firstadvisor
+    \g@addto@macro\@advisornames{#1}%
+    \@firstadvisorfalse
+  \else
+    \g@addto@macro\@advisornames{\textperiodcentered#1}%
+  \fi
+}
 
 % department chairman, not thesis committee chairman
 \def\chairman#1#2{\gdef\@chairmanname{#1}\gdef\@chairmantitle{#2}}
 
-%% `upcase' documentclass option: \choosecase is defined either as a dummy or
-%% a macro to change the (expanded) argument to uppercase.
+%% Master's vs doctoral wording — set by cover.tex via thesis.json's
+%% `degree_level`. Defaults to master so the class still works without it.
+\providecommand{\thesistypetitle}{Master's Thesis}
+\providecommand{\thesistypelower}{master's thesis}
+
+%% Yonsei Graduate School 2026 Title page (Appendix 2 of the official spec).
+%% Top margin = 6.1cm per spec (= body 5.3cm + 0.8cm extra).
 \def\maketitle{\begin{titlepage}
+\vspace*{0.8cm}%
 \large
 {\def\baselinestretch{1.2}\Large\bf \choosecase{\@title} \par}
-\vskip 5\baselineskip
-% by\par
-% {\Large  \choosecase{\@author}}
-\par
+\vskip 3\baselineskip
+\ifx\@advisornames\@empty\else
+  {\large Advisor :\ \@advisornames\par}
+\fi
+\vskip 3\baselineskip
 \@prevdegrees
 \par
 {\Large
-\choosecase{A Masters Thesis} \\
-% \choosecase{A Dissertation} \\
-\choosecase{Submitted to the} \choosecase{\@department} \\
-\choosecase{and the Graduate School of Yonsei University} \\
-\choosecase{in partial fulfillment of the} \\
-\choosecase{requirements for the degree of} \\
+\choosecase{A \thesistypetitle\ Submitted} \\
+\choosecase{to the \@department} \\
+\choosecase{and the Committee of the Graduate School} \\
+\choosecase{of Yonsei University in Partial Fulfillment of the} \\
+\choosecase{Requirements for the Degree of} \\
 \choosecase{\@degree}
-% \choosecase{\@degreeword} 
-% \choosecase{of}
-% \par
-
-}
-% \par
-% at the
-% \par\MIT\par
 \par
-% \@copyrightnotice
-% \par
+}
 \vskip 5\baselineskip
-{\Large  \choosecase{\@author}}
+{\Large \choosecase{\@author}}
 \vskip 4\baselineskip
-
-{\Large  \@degreemonth\ \@degreeyear}
-% \signature{Author}{\@department \\ \@thesisdate}
-% \par
-% \vfill
-% \unvbox\@titlesupervisor
-% \par
-% \vfill
-% \signature{Accepted by}{\@chairmanname \\ \@chairmantitle}
+{\Large \@degreemonth\ \@degreeyear}
 \vfill
 \end{titlepage}}
 
+%% Yonsei Graduate School 2026 Cover page (Appendix 1 of the official spec).
+%% Top margin = 6.8cm per spec (= body 5.3cm + 1.5cm extra).
 \def\makecover{\begin{coverpage}
+    \vspace*{1.5cm}%
     \large
     {\def\baselinestretch{1.2}\Large\bf \choosecase{\@title} \par}
     \vskip 14\baselineskip
-    % by\par
-    % {\Large  \choosecase{\@author}}
-    
-    {\Large  \choosecase{\@author}}
+    {\Large \choosecase{\@author}}
     \vskip 6\baselineskip
-    
     {\Large
-\choosecase{The Graduate School \\ Yonsei University \\ School of Mechanical Engineering}
-
+      \choosecase{\@department} \\
+      \choosecase{Graduate School} \\
+      \choosecase{Yonsei University}
     }
-    % \signature{Author}{\@department \\ \@thesisdate}
-    % \par
-    % \vfill
-    % \unvbox\@titlesupervisor
-    % \par
-    % \vfill
-    % \signature{Accepted by}{\@chairmanname \\ \@chairmantitle}
     \vfill
     \end{coverpage}}
 
-% this environment should probably be called abstract,
-% but we want people to also be able to get at the more
-% basic abstract environment
+% English abstract page per Yonsei 2026 spec sample (Appendix-like):
+% "Abstract" header, then thesis title, then content. The MIT-style
+% submission preamble was removed because the 2026 sample has neither
+% the "by Author" line nor the "Submitted to ..." paragraph.
 \def\abstractpage{\cleardoublepage
-\begin{center}{\large{\bf \@title} \\
-by \\
-\@author \\[\baselineskip]}
-\par
-\def\baselinestretch{1}\@normalsize
-Submitted to the \@department \\
-and the Graduate School of Yonsei University \\
-in partial fulfillment of the \\
-requirements for the \@degreeword\ of \\
-\@degree
-\end{center}
-\par
-\begin{abstract}}
-
-%% Changed from \unvbox to \unvcopy for use with multiple copies of abstract
-%% page.
-%% Krishna Sethuraman (1990)
-\def\endabstractpage{\end{abstract}\noindent
-%  \unvcopy\@abstractsupervisor \newpage}
-     \newpage}
+  \subsection*{Abstract}%
+  \addcontentsline{toc}{chapter}{Abstract}%
+  \begin{center}{\large\bfseries \@title}\end{center}%
+  \par\medskip
+  \def\baselinestretch{1}\@normalsize
+}
+\def\endabstractpage{\par\newpage}
 
 \usepackage[T1]{fontenc}
 \usepackage{CJKutf8}
 \usepackage[english]{babel}
 
-\newcommand{\headerkor}{국문요약}
+% Korean-abstract page header. For an English thesis the Yonsei 2026
+% sample names this section "Abstract in Korean" (English heading); for
+% a Korean thesis it would be "국문 요약". Default to the English-thesis
+% form; override \headerkor in the document if writing a Korean thesis.
+\newcommand{\headerkor}{Abstract in Korean}
 
+% Korean abstract page: header first, then Korean title, then content,
+% per the Yonsei 2026 spec sample.
 \def\abstractpagekor{\cleardoublepage
-\begin{center}{
-% \large{\headerkor} \\
-\large{\bf \titlekor} \\
-\vskip 35pt
-% by \\
-% \@author \\[\baselineskip]
+  \subsection*{\headerkor}%
+  \addcontentsline{toc}{chapter}{\headerkor}%
+  \begin{center}{\large\bfseries \titlekor}\end{center}%
+  \par\medskip
+  \def\baselinestretch{1}\@normalsize
 }
-% \par
-% \def\baselinestretch{1}\@normalsize
-% Submitted to the \@department \\
-% on \@thesisdate, in partial fulfillment of the \\
-% requirements for the \@degreeword\ of \\
-% \@degree
-\end{center}
-\par
-\begin{abstractkor}}
-
-%% Changed from \unvbox to \unvcopy for use with multiple copies of abstract
-%% page.
-%% Krishna Sethuraman (1990)
-\def\endabstractpagekor{\end{abstractkor}\noindent
-%  \unvcopy\@abstractsupervisor \newpage}
-    \newpage}
+\def\endabstractpagekor{\par\newpage}
 
 %% This counter is used to save the page number for the second copy of
 %% the abstract.
@@ -597,12 +564,17 @@ requirements for the \@degreeword\ of \\
 % The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
 \def\endcoverpage{\par\kern 0pt\egroup\vss\egroup}
 
+% Signature page container. The original MIT template constrained content
+% to a 5in inner vbox; that overflows the Yonsei 2026 signature layout
+% (3-member master ≈ 7in, 5-member doctoral more). Use a single page-sized
+% vbox so the committee blocks fit without an Overfull warning, and
+% rely on the outer centering / vss for vertical placement.
 \def\signpage{\cleardoublepage\centering
 %   \thispagestyle{empty}
   \parindent 0pt \parskip 10pt plus 1fil minus 1fil
-  \def\baselinestretch{1}\@normalsize\vbox to \vsize\bgroup\vbox to 5in\bgroup}
+  \def\baselinestretch{1}\@normalsize\vbox to \vsize\bgroup}
 % The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
-\def\endsignpage{\par\kern 0pt\egroup\vss\egroup\newpage}
+\def\endsignpage{\par\kern 0pt\egroup\newpage}
 
 \def\MIT{YONSEI UNIVERSITY}
 \def\Mit{Yonsei University}
@@ -613,18 +585,63 @@ requirements for the \@degreeword\ of \\
    document in whole or in part in any medium now known or hereafter
    created.}\par}
 
-\def\signature#1#2{
-% \par\hrulefill\null\\*
-\begin{minipage}{4cm}
+% \signature{role}{name} — rule (signature line) above, role line below,
+% optional second line for the signer's name (used by the 2026 signature
+% page: "Committee Chair / Prof. Hong, Gil-Dong"). If #2 is empty the
+% second line is omitted, preserving legacy single-arg call sites.
+\def\signature#1#2{%
+  \begin{minipage}{4cm}
     \centering
     \par\hrulefill\null
-\end{minipage}
- \\*\vskip 10pt 
-\noindent#1
-%   {\raggedleft #2\par}
-  }
+  \end{minipage}%
+  \\*\vskip 10pt
+  \noindent#1%
+  \def\@sig@second{#2}%
+  \ifx\@sig@second\@empty\else\\#2\fi
+}
 
-\def\abstract{\subsection*{Abstract}\small\def\baselinestretch{1}\@normalsize}
-\def\abstractkor{\subsection*{\headerkor}\small\def\baselinestretch{1}\@normalsize}
+% Legacy: \abstract / \abstractkor produced the section heading and
+% switched to small-text. The header is now rendered by \abstractpage
+% / \abstractpagekor directly, so these macros only adjust spacing.
+\def\abstract{\small\def\baselinestretch{1}\@normalsize}
+\def\abstractkor{\small\def\baselinestretch{1}\@normalsize}
 \def\endabstract{\par}
+
+%% Chapter heading per Yonsei 2026 spec sample: "N. Title" on a single
+%% line, not the report-class default "Chapter N\nnewline\nTitle". Drops
+%% the "Chapter" prefix and combines number+title.
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \Huge\bfseries
+    \ifnum \c@secnumdepth >\m@ne
+      \thechapter.\ %
+    \fi
+    #1\par\nobreak
+    \vskip 40\p@}}
+%% \chapter*{...} (used by Bibliography, Abstract via \section* etc.) keeps
+%% its default unnumbered heading via \@makeschapterhead — unchanged.
+
+%% TOC chapter entry: add a period after the chapter number so the entry
+%% reads "1. Introduction" not "1 Introduction". Locally redefines
+%% \numberline only inside the chapter-level \l@chapter call so section
+%% / subsection entries (which must NOT have trailing periods per spec)
+%% are unaffected.
+\renewcommand*\l@chapter[2]{%
+  \ifnum \c@tocdepth >\m@ne
+    \addpenalty{-\@highpenalty}%
+    \vskip 1.0em \@plus\p@
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode \bfseries
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      \def\numberline##1{\hb@xt@\@tempdima{##1.\hfil}}%
+      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \penalty\@highpenalty
+    \endgroup
+  \fi}
 

@@ -1,0 +1,18 @@
+{
+  "degree_level": "master",
+  "title": "Unofficial Thesis Template for Yonsei Graduate School",
+  "title_kor": "국문 타이틀",
+  "author": "John Doe",
+  "department": "School of Mechanical Engineering",
+  "degree": "Master of Mechanical Engineering",
+  "degree_month": "February",
+  "degree_year": "2026",
+  "supervisors": [
+    { "name": "John Doe", "title": "Professor" }
+  ],
+  "committee": [
+    { "role": "chair",  "title": "Prof.", "name": "John Doe" },
+    { "role": "member", "title": "Prof.", "name": "John Doe" },
+    { "role": "member", "title": "Prof.", "name": "John Doe" }
+  ]
+}

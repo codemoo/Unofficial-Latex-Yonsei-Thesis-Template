@@ -288,3 +288,8 @@ TSWLatexianTemp*
 #*Notes.bib
 .DS_Store
 .vscode
+CLAUDE.md
+
+## Agent-friendly tooling
+preview/
+.claude/scheduled_tasks.lock

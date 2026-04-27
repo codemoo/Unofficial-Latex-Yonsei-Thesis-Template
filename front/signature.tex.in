@@ -1,0 +1,40 @@
+% -*- Mode:TeX -*-
+%
+% Template for front/signature.tex. Rendered by scripts/render_metadata.py
+% from thesis.json (degree_level, committee[]). DO NOT edit signature.tex
+% directly — edit thesis.json and rerun the script. The committee count
+% must be 3 for master / 5 for doctoral per the Yonsei 2026 spec; titles
+% must all be "Prof." or all "Dr." (no mixing). The renderer enforces these.
+%
+% Once the page is signed in print, scan it as `front/signed.pdf` and
+% uncomment the \includepdf line in `front/cover.tex.in` to drop this
+% page in favor of the scan.
+
+\makeatletter
+\begin{signpage}
+\begin{large}
+\centering
+
+{\bf \@title}
+\\*\vskip 30pt
+This certifies that the \thesistypelower\\
+of \@author\ is approved.
+
+\vfill
+
+@@COMMITTEE_BLOCKS@@
+
+\vfill
+
+% Per spec: titles ("Prof." / "Dr.") cannot be mixed; digital approvals
+% via the Yonsei Portal System show names only.
+
+\@department\\
+Graduate School\\
+Yonsei University
+\\*\vskip 15pt
+\@degreemonth\ \@degreeyear
+
+\end{large}
+\end{signpage}
+\makeatother

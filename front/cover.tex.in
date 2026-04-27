@@ -1,0 +1,54 @@
+% -*-latex-*-
+% Template for front/cover.tex. Rendered by scripts/render_metadata.py
+% from thesis.json. DO NOT edit front/cover.tex directly — edit
+% thesis.json and rerun the script (scripts/build.sh does this automatically).
+
+% Master's vs doctoral wording — driven by `degree_level` in thesis.json.
+% Used by \maketitle (mitthesis.cls) and front/signature.tex.
+\renewcommand{\thesistypetitle}{@@THESIS_TYPE_TITLE@@}
+\renewcommand{\thesistypelower}{@@THESIS_TYPE_LOWER@@}
+
+\title{@@TITLE@@}
+
+\author{@@AUTHOR@@}
+% If you wish to list previous degrees, add \prevdegrees{...} here.
+
+\department{@@DEPARTMENT@@}
+
+% If the thesis is for two degrees simultaneously, list them both
+% separated by \and, e.g. \degree{Doctor of Philosophy \and Master of Science}
+\degree{@@DEGREE@@}
+
+\degreemonth{@@DEGREE_MONTH@@}
+\degreeyear{@@DEGREE_YEAR@@}
+
+% If there is more than one supervisor, add multiple \supervisor lines
+% by listing several entries under "supervisors" in thesis.json.
+@@SUPERVISOR_BLOCK@@
+
+\makecover
+\maketitle
+
+\cleardoublepage
+\pagestyle{empty}
+\setcounter{savepage}{\thepage}
+\input{front/signature}
+% Once your thesis is signed, save the scan as `front/signed.pdf` and
+% uncomment the next line.
+% \includepdf[pages={1}]{front/signed.pdf}
+\cleardoublepage
+
+\section*{Acknowledgments}
+\begin{CJK}{UTF8}{nanummj}
+\input{front/acknowldgment}
+\end{CJK}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+\input{front/contents}
+\pagestyle{plain}
+\begin{abstractpage}
+\input{front/abstract}
+\end{abstractpage}
+
+\cleardoublepage
