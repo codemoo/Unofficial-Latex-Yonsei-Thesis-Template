@@ -183,10 +183,9 @@ def render_signature(data: dict) -> str:
         signer = f"{m['title']}\\ {m['name']}" if m["title"] else m["name"]
         block = f"\\signature{{{role}}}{{{signer}}}"
         blocks.append(block)
-    # Separate blocks with \par + \vskip so the rubber-spaced \vfill markers
-    # in signature.tex.in distribute remaining vertical space evenly. The
-    # 25pt minimum keeps blocks visually distinct even when \vfill flexes.
-    committee_blocks = "\n\\par\\vskip 25pt\n".join(blocks)
+    # One \signature per line; the cls renders each as two fixed-height
+    # (1 cm) rows, so no extra vertical glue is needed between blocks.
+    committee_blocks = "\n".join(blocks)
     rendered = template.replace("@@COMMITTEE_BLOCKS@@", committee_blocks)
     if "@@COMMITTEE_BLOCKS@@" in rendered:
         fail("signature.tex.in did not consume @@COMMITTEE_BLOCKS@@")

@@ -2,8 +2,9 @@
 # Build main.pdf and surface only errors/warnings (agent-friendly output).
 #
 # Steps:
-#   1. Regenerate front/cover.tex and front/titlekor.tex from thesis.json.
-#   2. Run latexmk if available; otherwise fall back to pdflatex + bibtex.
+#   1. Regenerate front/cover.tex, titlekor.tex, signature.tex from thesis.json.
+#   2. Run latexmk if available; else pdflatex + bibtex; else latexmk inside
+#      the texlive/texlive Docker image (USE_DOCKER=1 forces this).
 #   3. Parse main.log and print just the lines that matter.
 #
 # Exits non-zero if compilation fails.
@@ -34,18 +35,38 @@ done
 export PATH
 
 have_latexmk=0
+use_docker=0
 if command -v latexmk >/dev/null 2>&1; then
   have_latexmk=1
 elif ! command -v pdflatex >/dev/null 2>&1; then
-  echo "build: error: no latexmk or pdflatex in PATH." >&2
-  echo "  Install MacTeX (https://tug.org/mactex) or texlive-full." >&2
-  exit 1
+  # No local TeX: fall back to the texlive/texlive Docker image if present.
+  # Override with TEXLIVE_IMAGE=<image>; force it with USE_DOCKER=1.
+  TEXLIVE_IMAGE="${TEXLIVE_IMAGE:-texlive/texlive:latest}"
+  if command -v docker >/dev/null 2>&1 && docker image inspect "$TEXLIVE_IMAGE" >/dev/null 2>&1; then
+    use_docker=1
+    have_latexmk=1
+  else
+    echo "build: error: no latexmk or pdflatex in PATH." >&2
+    echo "  Install MacTeX (https://tug.org/mactex) or texlive-full," >&2
+    echo "  or 'docker pull texlive/texlive:latest' to build in a container." >&2
+    exit 1
+  fi
 fi
+if [ "${USE_DOCKER:-0}" = "1" ]; then use_docker=1; have_latexmk=1; fi
+
+latexmk_cmd() {
+  if [ "$use_docker" -eq 1 ]; then
+    docker run --rm -u "$(id -u):$(id -g)" -v "$ROOT:/work" -w /work \
+      "${TEXLIVE_IMAGE:-texlive/texlive:latest}" latexmk "$@"
+  else
+    latexmk "$@"
+  fi
+}
 
 # 3. Compile. Suppress normal chatter; we read main.log afterwards.
 set +e
 if [ "$have_latexmk" -eq 1 ]; then
-  latexmk -pdf -interaction=nonstopmode -file-line-error main.tex \
+  latexmk_cmd -pdf -interaction=nonstopmode -file-line-error main.tex \
     >/dev/null 2>&1
   status=$?
 else

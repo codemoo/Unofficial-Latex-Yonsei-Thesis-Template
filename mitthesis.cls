@@ -1,160 +1,14 @@
-% $Log: mitthesis.cls,v $
-% Revision 2.0 2020/01/03 14:28:00 codemoo
-% Many changes for Yonsei Template
-%
-% Revision 1.9  2012/02/15 15:48:16  jdreed
-% Tweak the "permission" statement per the Libraries' specs
-% retrieved 15-Feb-2012
-%
-% Revision 1.8  2009/07/27 14:23:50  boojum
-% added changing draft mark
-%
-% Revision 1.6  2005/05/13 19:57:40  boojum
-% added leftblank option
-%
-% Revision 1.5  2002/04/18 14:10:08  boojum
-% changed doublespace into setspace for 2e compliance
-%
-% Revision 1.4  2001/02/08 18:57:13  boojum
-% turned two newpages into cleardoublepages
-%
-% Revision 1.3  2000/08/14 14:53:29  boojum
-% commented out footheight, which is relevant for drafthead
-%
-% Revision 1.2  1999/10/21 14:51:33  boojum
-% changed references to documentstyle to documentclass in comments
-%
-% Revision 1.1  1999/10/21 14:39:31  boojum
-% Initial revision
-%
-%Revision 1.7  1998/04/01  20:45:34  othomas
-%removed offending phrase ", and to grant others the right to do so" from copyright notice.
-%
-%Revision 1.6  96/06/26  15:07:29  othomas
-%safety checkin.
-%
-%Revision 1.5  93/06/07  15:38:50  starflt
-%Altered 'vi' option copyright wording to comply with new Institute
-%Archives requirements and MIT lawyers.
-%
-%Revision 1.4  92/08/19  16:51:06  lwvanels
-%Updated Course 6 title page for new permissions.
-%
-%Revision 1.3  92/04/23  10:16:15  epeisach
-%Fixed comment character in rcs file
-%
-%Revision 1.2  92/04/22  13:12:02  epeisach
-%Fixes for 1991 course 6 requirements
-%Phrase "and to grant others the right to do so" has been added to 
-%permission clause
-%Second copy of abstract is not counted as separate pages so numbering works
-%out
-%
-%Revision 1.1  90/05/04  11:45:53  lwvanels
-%Initial revision
-
-%
-% LaTeX format for theses at MIT
-% Based on "Specifications for Thesis Preparation" 
-
-% `vi' and `upcase' options by Krishna Sethuraman - krishna@athena.mit.edu
-% Margins and heading types by Peter Nuth  - nuth@ai.mit.edu
-% Title and abstract page by Stephen Gildea - gildea@erl.mit.edu
-% Look in this directory for example file mitthesis.doc
-% Also for propcover.tex - Boilerplate for PHD proposal.
-
-% To use this style - say something like:
-%  for dull, boring thesis format:
-%	\documentclass[12pt]{mitthesis}
-%       \pagestyle{plain}
-% OR for fast drafts: 
-%	\documentclass[11pt,singlespace,draft]{mitthesis}
-%	\pagestyle{drafthead}
-% OR for Tech Reports:
-%	\documentclass[12pt,twoside]{mitthesis}	
-%	\pagestyle{headings}
-% OR
-%  some other combination...
-%
-%%%% New options:
-% 
-% Option `twoside':
-%   Good for producing Tech Reports.
-%   The default is single-sided printing, which is what M.I.T. wants on the
-%   thesis document itself.
-%
-% Option `singlespace':
-%   Good for drafts.
-%   Double-spaced theses are the default.
-%   That is what M.I.T. asks for in the formal specifications.
-%
-% 	Note that MIT does not REQUIRE all theses to be double-spaced anymore.
-% 	Someone in the library system said that it's OK to be single-spaced.
-% 	(Regardless of what the specs. say...)
-%   To get singlespacing in an area - Use  the 'singlespace' environment. 
-%
-% Option `draft':
-%   Puts `overfull' boxes at the end of lines that are too long. 
-%
-% Pagestyle `drafthead':
-%   Puts the date and the label ``*DRAFT*'' in the footer.
-%
-%%%%%%%%%%
-%
-%%%% Parameters to initialize for boilerplate page:
-%
-%	\title{Mixed Circular Cylindrical Shells}
-% 	\author{J. Casey Salas}
-% 	\prevdegrees{B.S., University of California (1978) \\
-%		     S.M., Massachusetts Institute of Technology (1981)}
-% 	\department{Department of Electrical Engineering and Computer Science}
-% 	\degree{Doctor of Philosophy}
-%% If the thesis is for two degrees simultaneously, list them both
-%% separated by \and like this:
-% 	\degree{Doctor of Philosophy \and Master of Science}
-% 	\degreemonth{February}
-% 	\degreeyear{1987}
-% 	\thesisdate{December 10, 1986}
-%% If the thesis is copyright by the Institute, leave this line out and
-%% the standard copyright line will be used instead.
-% 	\copyrightnotice{J. Casey Salas, 1986}
-%% If there is more than one supervisor, use the \supervisor command
-%% once for each.
-% 	\supervisor{John D. Galli}{Director, Sound Instrument Laboratory}
-%% This is the department committee chairman, not the thesis committee chairman
-% 	\chairman{Arthur C. Smith}
-%		 {Chairman, Departmental Committee on Graduate Students}
-%% Make the titlepage based on the above information.  If you need
-%% something special and can't use the standard form, you can specify
-%% the exact text of the titlepage yourself.  Put it in a titlepage
-%% environment and leave blank lines where you want vertical space.
-%% The spaces will be adjusted to fill the entire page.  The dotted
-%% lines for the signatures are made with the \signature command.
-%
-%% The abstractpage environment sets up everything on the page except
-%% the text itself.  The title and other header material are put at the
-%% top of the page, and the supervisors are listed at the bottom.  A
-%% new page is begun both before and after.  Of course, an abstract may
-%% be more than one page itself.  If you need more control over the
-%% format of the page, you can use the abstract environment, which puts
-%% the word "Abstract" at the beginning and single spaces its text.
-%
-% 	\begin{abstractpage}
-%	    Abstract goes here.
-%	\end{abstractpage}
-%
-%%%%%%%% Newer additions 
-%
-% documentclass options - 
-% vi		For MIT course VI or VIII thesis - will copyright the thesis to
-% 		you while giving MIT permission to copy and distribute it.
-% upcase	Will put much of the cover page in uppercase, as per the
-% 		example on page 17 of the *Specifications for Thesis
-% 		Preparation*, (revised 1989)
-% Also added ``All Rights Reserved'' to default copyright notice.
-%
-%%%%%%%%%%%
-% 
+%% mitthesis.cls — Yonsei University Graduate School thesis class
+%%
+%% Originally derived from the MIT thesis class (Stephen Gildea, Peter
+%% Nuth, Krishna Sethuraman; original notice retained below).
+%% Rewritten for the Yonsei University
+%% Graduate School 2026 thesis format, following the official Word sample
+%% "영문 MSword_박사학위논문_양식_2026.docx" (doctoral, English thesis).
+%%
+%% The file keeps its historical name so that main.tex and the build
+%% scripts stay unchanged.
+%%
 % Documentclass options (vi and upcase) and changes to copyright notice
 %	Copyright (c) 1990, by Krishna Sethuraman.
 %
@@ -166,482 +20,495 @@
 % Permission to copy all or part of this work is granted, provided
 % that the copies are not made or distributed for resale, and that
 % the copyright notice and this notice are retained.
-% 
+%
 % THIS WORK IS PROVIDED ON AN "AS IS" BASIS.  THE AUTHOR PROVIDES NO
 % WARRANTY WHATSOEVER, EITHER EXPRESS OR IMPLIED, REGARDING THE WORK,
 % INCLUDING WARRANTIES WITH RESPECT TO ITS MERCHANTABILITY OR FITNESS
 % FOR ANY PARTICULAR PURPOSE.
-%%%%%%%%
-\usepackage{emptypage}
+%%
+%% What the official 2026 spec says (and where it is enforced here):
+%%   - A4 paper, Times New Roman ............... geometry / newtx below
+%%   - Margins: top/bottom 5.3 cm, left/right 3.5 cm,
+%%     header 1.5 cm, footer 3.2 cm ............ geometry below
+%%   - Main title 18 pt bold, subheadings 13 pt bold, body 10-11 pt,
+%%     footnotes 9 pt, 1.5 line spacing ........ sizes / setspace below
+%%   - Paragraphs indented 2 spaces, justified . \parindent below
+%%   - Page numbers centred at the bottom ...... pagestyle plain
+%%   - Cover page (title 6.8 cm from top) ...... \makecover
+%%   - Title page (title 6.1 cm from top) ...... \maketitle
+%%   - Signature page (1 cm rows, 1/4.5/7.5/1 cm columns) ... signpage,
+%%     \signature, \signpagefoot
+%%   - "TABLE OF CONTENTS" 16 pt centred; entries "1. Title" / "2.1 Title"
+%%     with small-dot leaders and a centred page column, as in the
+%%     sample's TOC table; List of Figures / Tables / Abstract /
+%%     References / Abstract in Korean as 13 pt left headings
+%%     ........................................ \tableofcontents,
+%%     \yonsei@tocline, \l@chapter, \@makeschapterhead
+%%   - Figure / table labels "<Fig 1>", "<Table 1>" .. caption setup
+%%   - Chapter heading "1. Introduction" 16 pt bold on one line;
+%%     "1.1 Section" 13 pt bold ................. \@makechapterhead,
+%%     \section
+%%   - Appendices listed as "Appendix 1. Title" . \appendix
+%%   - Abstract / Abstract in Korean pages ...... abstractpage,
+%%     abstractpagekor, \keywords, \keywordskor
+%%
+%% Public interface used by the template:
+%%   \title \author \department \degree \degreemonth \degreeyear
+%%   \supervisor{name}{title}   (repeat for several advisors; names are
+%%                               joined with a middle dot on the title page)
+%%   \thesistypetitle \thesistypelower   (set in front/cover.tex)
+%%   \makecover \maketitle
+%%   signpage environment, \signpagehead, \signature{role}{name},
+%%   \signpagefoot
+%%   \frontheading{...}  — 13 pt bold left heading
+%%   \centerheading{...} — 16 pt bold centred heading (Acknowledgements)
+%%   \frontheadingplain{...} — same, regular weight (References, Abstract in Korean)
+%%   abstractpage / abstractpagekor environments, \keywords, \keywordskor
+%%   \headerkor — heading of the Korean abstract ("Abstract in Korean")
+%%   \titlekor  — Korean title, defined by front/titlekor.tex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mitthesis}[1999/10/20]
+\ProvidesClass{mitthesis}[2026/10/29 Yonsei University Graduate School thesis (2026 spec)]
 
-\def\mystretch{1.5}		% Double spacing hack
-\DeclareOption{doublespace}{}	% This is default
-				% So we do not read this style twice
-\DeclareOption{singlespace}{		% If he explicitly wants single spacing
-    \typeout{Single spaced}
-    \def\mystretch{1}}	
-
-%% `vi' and `upcase' document style options.  Krishna Sethuraman (1990)
-\newcount\vithesis
-\DeclareOption{vi}{\typeout{Course VI/VIII thesis style.}\advance\vithesis by1}
-\vithesis=0
-
-\DeclareOption{upcase}{\typeout{Uppercase cover page.}
-	\gdef\choosecase#1{\uppercase\expandafter{#1}}}
-\def\choosecase#1{#1}
-
-%% leftblank option by Kevin Fu
-\newif\if@leftblank \@leftblankfalse
-
-\DeclareOption{leftblank}{\typeout{Intentionally Leaving Pages Blank}
-\@leftblanktrue}
-
-%  Thesis looks much like report
+%% ---------------------------------------------------------------------
+%% Options
+%% ---------------------------------------------------------------------
+\def\yonsei@stretch{1.5}
+\DeclareOption{doublespace}{\def\yonsei@stretch{1.5}}
+\DeclareOption{singlespace}{\def\yonsei@stretch{1}}
+% Accepted for backward compatibility; they have no effect any more.
+\DeclareOption{vi}{}
+\DeclareOption{upcase}{}
+\DeclareOption{leftblank}{}
+\DeclareOption{twoside}{\ClassWarning{mitthesis}{Yonsei theses are single-sided; ignoring twoside}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-\ProcessOptions
-\LoadClass{report}
+\ProcessOptions\relax
+\LoadClass[a4paper,oneside]{report}
 
-% If the user wants single spacing, set baselinestretch=1.
+%% ---------------------------------------------------------------------
+%% Fonts: Times New Roman look-alike (newtx) with matching maths.
+%% NOTE: newtxmath already provides the AMS symbol fonts — do NOT load
+%% amssymb/amsfonts in main.tex (it causes "already defined" errors).
+%% ---------------------------------------------------------------------
+\RequirePackage{cmap}            % searchable/copyable PDF text (before fontenc)
+\RequirePackage[T1]{fontenc}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\RequirePackage{textcomp}
+\RequirePackage{CJKutf8}         % Korean (nanummj) for title_kor / abstract
+\RequirePackage[english]{babel}
 
-\usepackage{setspace}
+%% ---------------------------------------------------------------------
+%% Page geometry (spec C. Margins)
+%% ---------------------------------------------------------------------
+\RequirePackage[a4paper,
+  top=5.3cm, bottom=5.3cm, left=3.5cm, right=3.5cm,
+  headheight=0pt, headsep=0pt,
+  footskip=2.1cm]{geometry}       % footer 3.2 cm from the paper edge
+\pagestyle{plain}                 % page number centred at the bottom
 
-% Note - doublespace.sty has some float-related troubles in
-% combination with graphics or color, and is not officially compliant
-% with 2e.  setspace is a replacement which is 2e-compliant.
+%% ---------------------------------------------------------------------
+%% Line spacing, indentation, footnotes
+%% ---------------------------------------------------------------------
+\RequirePackage{setspace}
+\setstretch{\yonsei@stretch}
+\setlength{\parindent}{2em}       % "indent the beginning of paragraphs by 2 spaces"
+                                  % (the Word sample uses 2 characters = 20 pt at 10 pt)
+\setlength{\parskip}{0pt}
+\renewcommand{\footnotesize}{\fontsize{9}{11}\selectfont}
 
-% Read the doublespace style that we got from Rochester:
-%\input setdoublespace.sty 		
+%% Heading font sizes
+\newcommand{\yonsei@sizecover}{\fontsize{18}{24}\selectfont}   % cover title etc.
+\newcommand{\yonsei@sizetitle}{\fontsize{16}{24}\selectfont}   % title page
+\newcommand{\yonsei@sizechap}{\fontsize{16}{20}\selectfont}    % chapter / TOC heading
+\newcommand{\yonsei@sizesub}{\fontsize{13}{18}\selectfont}     % 13 pt subheadings
 
-\def\baselinestretch{\mystretch}	% Double spacing hack
-
-%%%%%%%  Set up margins and formatting params %%%
-
-% Margins.
-%  Note we want 1in top margin assuming no header line, so push header
-%	into 1in margin.
-%  Draft mode brings the header back down.
-
-% Yonsei 2026 spec: A4, top/bottom 5.3cm, left/right 3.5cm.
-% Default LaTeX adds 1in to oddsidemargin and topmargin.
-\setlength{\oddsidemargin}{0.378in}	% L = 1in + 0.378in = 3.50cm
-\setlength{\evensidemargin}{0.378in}	% L = 1in + 0.378in = 3.50cm
-\setlength{\topmargin}{1.087in}		% top = 1in + 1.087in = 5.30cm
-\setlength{\textwidth}{5.512in}		% 14.0cm  -> right margin 3.50cm
-\setlength{\textheight}{7.520in}	% 19.1cm -> bottom margin 5.30cm
-\addtolength{\topmargin}{-\headheight}	% No header, so compensate
-\addtolength{\topmargin}{-\headsep}	% for header height and separation
-
-% The next two macros compensate page style for headers and footers
-% I only need them in page styles that USE headers and footers.
-    % If we have a header, it must be 1in from top of page.
-\def\pulldownheader{			% Shift header down 1in from top
-    \addtolength{\topmargin}{\headheight}	
-    \addtolength{\topmargin}{\headsep}	
-    \addtolength{\textheight}{-\headheight}
-    \addtolength{\textheight}{-\headsep}
-}
-    % If we have a footer, put it 1in up from bottom
-\def\pullupfooter{				% Shift footer up
-    \addtolength{\textheight}{-\footskip}
-%    \addtolength{\textheight}{-\footheight}  %footheight doesn't
-%    						exist in 2e
-}
-
-%%%%%%%  End of margins and formatting params %%%
-
-%%%%%%%  Fix various header and footer problems %%%
-
-% Draft mark on the right side of left pages (outside)
-% this mark is also the only one visible on single sided.
-\newcommand{\draftrmark}{**DRAFT**} 
-% Draft mark on the left side of right pages (outside)
-\newcommand{\draftlmark}{**DRAFT**} % 
-
-% Macros to make changing the Draft easier
-\newcommand{\drmark}[1]{\renewcommand{\draftrmark}{#1}}
-\newcommand{\dlmark}[1]{\renewcommand{\draftlmark}{#1}}
-\newcommand{\dmark}[1]{\drmark{#1}\dlmark{#1}}
-
-% Format for draft of thesis.  Define our own PageStyle -
-% Just like headings, but has foot lines with the date and warning
-
-\if@twoside         % If two-sided printing.
-\def\ps@drafthead{
-    \let\@mkboth\markboth
-    \def\@oddfoot{\rm \today \hfil \sc \draftrmark}
-    \def\@evenfoot{\sc \draftlmark \hfil \rm \today }
-    \def\@evenhead{\rm \thepage\hfil \sl \leftmark}
-    \def\@oddhead{\hbox{}\sl \rightmark \hfil \rm\thepage}
-    \def\chaptermark##1{\markboth {\uppercase{\ifnum \c@secnumdepth >\m@ne
-	\@chapapp\ \thechapter. \ \fi ##1}}{}}
-    \def\sectionmark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\z@
-	\thesection. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
-    \pullupfooter				% Bring footer up
-}
-\else               % If one-sided printing.
-\def\ps@drafthead{
-    \let\@mkboth\markboth
-    \def\@oddfoot{\rm \today \hfil \sc \draftrmark}
-    \def\@oddhead{\hbox{}\sl \rightmark \hfil \rm\thepage}
-    \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne
-	\@chapapp\ \thechapter. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
-    \pullupfooter				% Bring footer up
-}
-\fi
-
-% I redefine these formats that were defined in report.sty
-% Definition of 'headings' page style 
-%  Note the use of ##1 for parameter of \def\chaptermark inside the
-%  \def\ps@headings.
-%
-
-\if@twoside					% If two-sided printing.
-\def\ps@headings{\let\@mkboth\markboth
-    \def\@oddfoot{}
-    \def\@evenfoot{}		% No feet.
-    \def\@evenhead{\rm \thepage\hfil \sl \leftmark}	% Left heading.
-    \def\@oddhead{\hbox{}\sl \rightmark \hfil \rm\thepage}	% Right heading.
-    \def\chaptermark##1{\markboth {\uppercase{\ifnum \c@secnumdepth >\m@ne
-	\@chapapp\ \thechapter. \ \fi ##1}}{}}	
-    \def\sectionmark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\z@
-	\thesection. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
-}
-\else						% If one-sided printing.
-\def\ps@headings{\let\@mkboth\markboth
-    \def\@oddfoot{}
-    \def\@evenfoot{}		%     No feet.
-    \def\@oddhead{\hbox {}\sl \rightmark \hfil \rm\thepage}	% Heading.
-    \def\chaptermark##1{\markright {\uppercase{\ifnum \c@secnumdepth >\m@ne
-	\@chapapp\ \thechapter. \ \fi ##1}}}
-    \pulldownheader				% Bring header down from edge
-}
-\fi
-
-% Redefinition of 'myheadings' page style.  
-%
-\def\ps@myheadings{\let\@mkboth\@gobbletwo
-    \def\@oddfoot{}
-    \def\@evenfoot{}
-    \def\sectionmark##1{}
-    \def\subsectionmark##1{}
-    \def\@evenhead{\rm \thepage\hfil\sl\leftmark\hbox {}}	%
-    \def\@oddhead{\hbox{}\sl\rightmark \hfil \rm\thepage}	%
-    \pulldownheader				% Bring header down from edge
-}						
-
-% Redefine '/chapter' to always start on an odd page.
-% Should make no difference in singleside mode.
-%
-\if@leftblank
-% Prints "THIS PAGE INTENTIONALLY LEFT BLANK" on blank pages.
-\def\chapter{\clearpage\ifodd\c@page\else
-   \hbox{}\par\vfill\centerline%
-   {THIS PAGE INTENTIONALLY LEFT BLANK}%
-   \vfill\newpage\fi
-   \thispagestyle{plain}	% Page style of chapter page is 'plain'
-   \global\@topnum\z@		% Prevents figures from going at top of page.
-   \@afterindentfalse		% Suppresses indent in first paragraph.  Change
-   \secdef\@chapter\@schapter}	% to \@afterindenttrue to have indent.
-\else
-\def\chapter{\cleardoublepage	% Starts new page.
-   \thispagestyle{plain}	% Page style of chapter page is 'plain'
-   \global\@topnum\z@		% Prevents figures from going at top of page.
-   \@afterindentfalse		% Suppresses indent in first paragraph.  Change
-   \secdef\@chapter\@schapter}	% to \@afterindenttrue to have indent.
-\fi
-% If using the report style, use - instead of . in the figure number.
-\@ifundefined{thechapter}{}{\def\thefigure{\thechapter-\arabic{figure}}}
-
-
-%%%%%%%%%  End of Style parameters %%%%
-
-% Here's Gildea's Boilerplate Stuff.
-% Copyright (c) 1987 by Stephen Gildea
-% Permission to copy all or part of this work is granted, provided
-% that the copies are not made or distributed for resale, and that
-% the copyright notice and this notice are retained.
-
-%% Define all the pieces that go on the title page and the abstract.
-
-% \title and \author already exist
-
-\def\prevdegrees#1{\gdef\@prevdegrees{#1}}
-\def\@prevdegrees{}
-
+%% ---------------------------------------------------------------------
+%% Front-matter data
+%% ---------------------------------------------------------------------
 \def\department#1{\gdef\@department{#1}}
-
-% If you are getting two degrees, use \and between the names.
-\def\degree#1{\setbox0\hbox{#1}	 %for side effect of setting \@degreeword
-  \gdef\@degree{#1}}
-
-% \and is used inside the \degree argument to separate two degrees
-\def\and{\gdef\@degreeword{degrees} \par and \par}
-\def\@degreeword{degree}
-
-% The copyright notice stuff is a tremendous mess.
-%
-% \@copyrightnotice is used by \maketitle to actually put text on the
-% page; it defaults to ``Copyright MIT 19xx.  All rights reserved.''
-% \copyrightnoticetext takes an argument and defined \@copyrightnotice
-% to that argument.  \copyrightnotice takes an argument, and calls
-% \copyrightnoticetext with that argument, preceeded by a copyright
-% symbol and followed by ``All rights reserved.'' and the standard
-% permission notice.
-% 
-% If you use the 'vi' option, \copyrightnoticetext is used to set the
-% copyright to ``(C) Your Name, Current Year in Roman Numerals.''
-% followed by the permission notice.
-
-% If there is no \copyrightnotice command, it is asssumed that MIT
-% holds the copyright.  This commands adds the copyright symbol to the
-% beginning, and puts the standard permission notice below.
-%% ``All rights reserved'' added.  Krishna Sethuraman (1990)
-\def\copyrightnotice#1{\copyrightnoticetext{\copyright\ #1.  All rights
-reserved.\par\permission}}
-
-% Occacionally you will need to exactly specify the text of the 
-% copyright notice.  The \copyrightnoticetext command is then useful.
-\long\def\copyrightnoticetext#1{\gdef\@copyrightnotice{#1}}
-\def\@copyrightnotice{\copyright\ \Mit\ \@degreeyear.  All rights reserved.}
-
-%% `vi' documentclass option: Specifying this option automatically
-%% copyrights the thesis to the author and gives MIT permission to copy and
-%% distribute the document.  If you want, you can still specify
-%% \copyrightnotice{stuff} to copyright to someone else, or
-%% \copyrightnoticetext{stuff} to specify the exact text of the copyright
-%% notice.
-\ifodd\vithesis \copyrightnoticetext{\copyright\ \@author,
-\uppercase\expandafter{\romannumeral\@degreeyear}.  All rights reserved.\par\permission}
-%% or just
-%%\@degreeyear}}
-\typeout{Copyright given to author,
-	permission to copy/distribute given to MIT.}
-\else \typeout{Thesis document copyright MIT unless otherwise (manually) specified}
-\fi
-
-\def\thesisdate#1{\gdef\@thesisdate{#1}}
-
-% typically just a month and year
+\def\@department{\ClassError{mitthesis}{No \string\department\space given}{}}
+\def\degree#1{\gdef\@degree{#1}}
+\def\@degree{\ClassError{mitthesis}{No \string\degree\space given}{}}
 \def\degreemonth#1{\gdef\@degreemonth{#1}}
 \def\degreeyear#1{\gdef\@degreeyear{#1}}
+\def\@degreemonth{February}
+\def\@degreeyear{\the\year}
 
-% Usage: \supervisor{name}{title}
-%        \chairman{name}{title}
-
-% since there can be more than one supervisor,
-% we build the appropriate boxes for the titlepage and
-% the abstractpage as the user makes multiple calls
-% to \supervisor
-% Accumulate the middle-dot separated advisor list shown on the Title page
-% per Yonsei 2026 spec ("Advisor : Name1·Name2·..."). The MIT-style
-% "Certified by" supervisor boxes were dropped as dead code.
+% Advisors: "Advisor : Name1·Name2" on the title page.
 \let\@advisornames\@empty
 \newif\if@firstadvisor \@firstadvisortrue
-
 \def\supervisor#1#2{%
   \if@firstadvisor
     \g@addto@macro\@advisornames{#1}%
     \@firstadvisorfalse
   \else
     \g@addto@macro\@advisornames{\textperiodcentered#1}%
-  \fi
-}
-
-% department chairman, not thesis committee chairman
-\def\chairman#1#2{\gdef\@chairmanname{#1}\gdef\@chairmantitle{#2}}
-
-%% Master's vs doctoral wording — set by cover.tex via thesis.json's
-%% `degree_level`. Defaults to master so the class still works without it.
-\providecommand{\thesistypetitle}{Master's Thesis}
-\providecommand{\thesistypelower}{master's thesis}
-
-%% Yonsei Graduate School 2026 Title page (Appendix 2 of the official spec).
-%% Top margin = 6.1cm per spec (= body 5.3cm + 0.8cm extra).
-\def\maketitle{\begin{titlepage}
-\vspace*{0.8cm}%
-\large
-{\def\baselinestretch{1.2}\Large\bf \choosecase{\@title} \par}
-\vskip 3\baselineskip
-\ifx\@advisornames\@empty\else
-  {\large Advisor :\ \@advisornames\par}
-\fi
-\vskip 3\baselineskip
-\@prevdegrees
-\par
-{\Large
-\choosecase{A \thesistypetitle\ Submitted} \\
-\choosecase{to the \@department} \\
-\choosecase{and the Committee of the Graduate School} \\
-\choosecase{of Yonsei University in Partial Fulfillment of the} \\
-\choosecase{Requirements for the Degree of} \\
-\choosecase{\@degree}
-\par
-}
-\vskip 5\baselineskip
-{\Large \choosecase{\@author}}
-\vskip 4\baselineskip
-{\Large \@degreemonth\ \@degreeyear}
-\vfill
-\end{titlepage}}
-
-%% Yonsei Graduate School 2026 Cover page (Appendix 1 of the official spec).
-%% Top margin = 6.8cm per spec (= body 5.3cm + 1.5cm extra).
-\def\makecover{\begin{coverpage}
-    \vspace*{1.5cm}%
-    \large
-    {\def\baselinestretch{1.2}\Large\bf \choosecase{\@title} \par}
-    \vskip 14\baselineskip
-    {\Large \choosecase{\@author}}
-    \vskip 6\baselineskip
-    {\Large
-      \choosecase{\@department} \\
-      \choosecase{Graduate School} \\
-      \choosecase{Yonsei University}
-    }
-    \vfill
-    \end{coverpage}}
-
-% English abstract page per Yonsei 2026 spec sample (Appendix-like):
-% "Abstract" header, then thesis title, then content. The MIT-style
-% submission preamble was removed because the 2026 sample has neither
-% the "by Author" line nor the "Submitted to ..." paragraph.
-\def\abstractpage{\cleardoublepage
-  \subsection*{Abstract}%
-  \addcontentsline{toc}{chapter}{Abstract}%
-  \begin{center}{\large\bfseries \@title}\end{center}%
-  \par\medskip
-  \def\baselinestretch{1}\@normalsize
-}
-\def\endabstractpage{\par\newpage}
-
-\usepackage[T1]{fontenc}
-\usepackage{CJKutf8}
-\usepackage[english]{babel}
-
-% Korean-abstract page header. For an English thesis the Yonsei 2026
-% sample names this section "Abstract in Korean" (English heading); for
-% a Korean thesis it would be "국문 요약". Default to the English-thesis
-% form; override \headerkor in the document if writing a Korean thesis.
-\newcommand{\headerkor}{Abstract in Korean}
-
-% Korean abstract page: header first, then Korean title, then content,
-% per the Yonsei 2026 spec sample.
-\def\abstractpagekor{\cleardoublepage
-  \subsection*{\headerkor}%
-  \addcontentsline{toc}{chapter}{\headerkor}%
-  \begin{center}{\large\bfseries \titlekor}\end{center}%
-  \par\medskip
-  \def\baselinestretch{1}\@normalsize
-}
-\def\endabstractpagekor{\par\newpage}
-
-%% This counter is used to save the page number for the second copy of
-%% the abstract.
-\newcounter{savepage}
-
-% You can use the titlepage environment to do it all yourself if you
-% don't want to use \maketitle.  If the titlepage environment, the
-% paragraph skip is infinitely stretchable, so if you leave a blank line
-% between lines that you want space between, the space will stretch so
-% that the title page fills up the entire page.
-\def\titlepage{\cleardoublepage\centering
-  \thispagestyle{empty}
-  \parindent 0pt \parskip 10pt plus 1fil minus 1fil
-  \def\baselinestretch{1.5}\@normalsize\vbox to \vsize\bgroup\vbox to 9in\bgroup}
-% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
-\def\endtitlepage{\par\kern 0pt\egroup\vss\egroup\newpage}
-
-\def\coverpage{\cleardoublepage\centering
-  \thispagestyle{empty}
-%   \parindent 0pt \parskip 10pt plus 1fil minus 1fil
-  \def\baselinestretch{1.5}\@normalsize\vbox to \vsize\bgroup\vbox to 9in\bgroup}
-% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
-\def\endcoverpage{\par\kern 0pt\egroup\vss\egroup}
-
-% Signature page container. The original MIT template constrained content
-% to a 5in inner vbox; that overflows the Yonsei 2026 signature layout
-% (3-member master ≈ 7in, 5-member doctoral more). Use a single page-sized
-% vbox so the committee blocks fit without an Overfull warning, and
-% rely on the outer centering / vss for vertical placement.
-\def\signpage{\cleardoublepage\centering
-%   \thispagestyle{empty}
-  \parindent 0pt \parskip 10pt plus 1fil minus 1fil
-  \def\baselinestretch{1}\@normalsize\vbox to \vsize\bgroup}
-% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
-\def\endsignpage{\par\kern 0pt\egroup\newpage}
-
-\def\MIT{YONSEI UNIVERSITY}
-\def\Mit{Yonsei University}
-
-\def\permission{\par\noindent{\centering
-   The author hereby grants to MIT permission to reproduce and to
-   distribute publicly paper and electronic copies of this thesis
-   document in whole or in part in any medium now known or hereafter
-   created.}\par}
-
-% \signature{role}{name} — rule (signature line) above, role line below,
-% optional second line for the signer's name (used by the 2026 signature
-% page: "Committee Chair / Prof. Hong, Gil-Dong"). If #2 is empty the
-% second line is omitted, preserving legacy single-arg call sites.
-\def\signature#1#2{%
-  \begin{minipage}{4cm}
-    \centering
-    \par\hrulefill\null
-  \end{minipage}%
-  \\*\vskip 10pt
-  \noindent#1%
-  \def\@sig@second{#2}%
-  \ifx\@sig@second\@empty\else\\#2\fi
-}
-
-% Legacy: \abstract / \abstractkor produced the section heading and
-% switched to small-text. The header is now rendered by \abstractpage
-% / \abstractpagekor directly, so these macros only adjust spacing.
-\def\abstract{\small\def\baselinestretch{1}\@normalsize}
-\def\abstractkor{\small\def\baselinestretch{1}\@normalsize}
-\def\endabstract{\par}
-
-%% Chapter heading per Yonsei 2026 spec sample: "N. Title" on a single
-%% line, not the report-class default "Chapter N\nnewline\nTitle". Drops
-%% the "Chapter" prefix and combines number+title.
-\renewcommand{\@makechapterhead}[1]{%
-  \vspace*{50\p@}%
-  {\parindent \z@ \raggedright \normalfont
-    \interlinepenalty\@M
-    \Huge\bfseries
-    \ifnum \c@secnumdepth >\m@ne
-      \thechapter.\ %
-    \fi
-    #1\par\nobreak
-    \vskip 40\p@}}
-%% \chapter*{...} (used by Bibliography, Abstract via \section* etc.) keeps
-%% its default unnumbered heading via \@makeschapterhead — unchanged.
-
-%% TOC chapter entry: add a period after the chapter number so the entry
-%% reads "1. Introduction" not "1 Introduction". Locally redefines
-%% \numberline only inside the chapter-level \l@chapter call so section
-%% / subsection entries (which must NOT have trailing periods per spec)
-%% are unaffected.
-\renewcommand*\l@chapter[2]{%
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
-    \setlength\@tempdima{1.5em}%
-    \begingroup
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode \bfseries
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      \def\numberline##1{\hb@xt@\@tempdima{##1.\hfil}}%
-      #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
-      \penalty\@highpenalty
-    \endgroup
   \fi}
 
+% Master's vs doctoral wording, overridden in front/cover.tex.
+\providecommand{\thesistypetitle}{Dissertation}
+\providecommand{\thesistypelower}{dissertation}
+
+% Korean-abstract heading: English thesis -> "Abstract in Korean";
+% for a Korean thesis \renewcommand{\headerkor}{국문 요약}.
+\newcommand{\headerkor}{Abstract in Korean}
+
+% Exact gap from the top of the text area to the first box on a page
+% (\null absorbs \topskip so the gap is literally #1).
+\newcommand{\yonsei@topgap}[1]{\null\vskip\dimexpr#1-\topskip\relax}
+
+%% ---------------------------------------------------------------------
+%% Cover page (Appendix 1 of the spec)
+%%   rows: 1.5 cm (blank) | 4.75 cm title (top) | 3.85 cm author (bottom)
+%%         | 8.90 cm department block (bottom)
+%% ---------------------------------------------------------------------
+\def\makecover{%
+  \clearpage\thispagestyle{empty}%
+  \begingroup\setstretch{1}\offinterlineskip\parindent\z@\parskip\z@\centering
+  \yonsei@topgap{1.5cm}%
+  \begin{minipage}[t][8.6cm][s]{\textwidth}\centering
+    {\yonsei@sizecover\bfseries\@title\par}
+    \vfill
+    {\yonsei@sizecover\bfseries\@author\par}
+  \end{minipage}\par
+  \vfill
+  \begin{minipage}[t]{\textwidth}\centering
+    \fontsize{18}{31}\selectfont\bfseries
+    \@department\\
+    Graduate School\\
+    Yonsei University\par
+  \end{minipage}\par
+  \endgroup
+  \clearpage}
+
+%% ---------------------------------------------------------------------
+%% Title page (Appendix 2 of the spec)
+%%   rows: 0.8 (blank) | 3.4 title | 1.2 advisor | 1.0 (blank) | 6.0
+%%         submission block | 1.7 author | 3.7 (blank) | 1.0 date
+%% ---------------------------------------------------------------------
+\def\maketitle{%
+  \clearpage\thispagestyle{empty}%
+  \begingroup\setstretch{1}\offinterlineskip\parindent\z@\parskip\z@\centering
+  \yonsei@topgap{0.8cm}%
+  \begin{minipage}[t][3.4cm][t]{\textwidth}\centering
+    {\fontsize{16}{23}\selectfont\bfseries\@title\par}
+  \end{minipage}\par
+  \begin{minipage}[t][1.2cm][c]{\textwidth}\centering
+    \ifx\@advisornames\@empty\else
+      {\yonsei@sizetitle\bfseries Advisor :\ \@advisornames\par}
+    \fi
+  \end{minipage}\par
+  \vskip 1.0cm
+  \begin{minipage}[t][6.0cm][t]{\textwidth}\centering
+    \yonsei@sizetitle\bfseries
+    A \thesistypetitle\ Submitted\\
+    to the \@department\\
+    and the Committee of the Graduate School\\
+    of Yonsei University in Partial Fulfillment of the\\
+    Requirements for the Degree of\\
+    \@degree\par
+  \end{minipage}\par
+  \begin{minipage}[t][1.7cm][b]{\textwidth}\centering
+    {\yonsei@sizetitle\bfseries\@author\par}
+  \end{minipage}\par
+  \vskip 3.7cm minus 1cm   % shrinks if a long title/degree needs room
+  \begin{minipage}[t][1.0cm][b]{\textwidth}\centering
+    {\yonsei@sizetitle\bfseries\@degreemonth\ \@degreeyear\par}
+  \end{minipage}\par
+  \endgroup
+  \clearpage}
+
+%% ---------------------------------------------------------------------
+%% Signature page (Appendix 3 of the spec)
+%%   rows: 2.43 title | 1.95 "This certifies ..." | 1.0 signature line +
+%%         1.0 role/name per committee member | gap | 3.04 footer
+%%   columns: 1.0 | 4.5 | 7.5 | 1.0 cm  (text width 14 cm)
+%% ---------------------------------------------------------------------
+\newlength{\yonsei@sigcolA}\setlength{\yonsei@sigcolA}{1.0cm}
+\newlength{\yonsei@sigcolB}\setlength{\yonsei@sigcolB}{4.5cm}
+\newlength{\yonsei@sigcolC}\setlength{\yonsei@sigcolC}{7.5cm}
+\newlength{\yonsei@sigrow}\setlength{\yonsei@sigrow}{1.0cm}
+
+\newenvironment{signpage}{%
+  \clearpage\thispagestyle{empty}%
+  \begingroup\setstretch{1}\offinterlineskip\parindent\z@\parskip\z@\raggedright}{%
+  \par\endgroup\clearpage}
+
+\def\signpagehead{%
+  \begin{minipage}[t][2.43cm][t]{\textwidth}\centering
+    {\yonsei@sizesub\bfseries\@title\par}
+  \end{minipage}\par
+  \begin{minipage}[t][1.95cm][t]{\textwidth}\centering
+    {\yonsei@sizesub\bfseries
+     This certifies that the \thesistypelower\\
+     of \@author\ is approved.\par}
+  \end{minipage}\par}
+
+% \signature{role}{name}: a 1 cm row holding the signature line over the
+% name column, then a 1 cm row with "Committee Chair" | "Prof. Name".
+% If #2 is empty only the role is printed (legacy single-field call).
+\def\signature#1#2{%
+  \begin{minipage}[t][\yonsei@sigrow][b]{\textwidth}
+    \noindent\hspace*{\yonsei@sigcolA}\hspace*{\yonsei@sigcolB}%
+    \rule{\yonsei@sigcolC}{0.4pt}\par
+  \end{minipage}\par
+  \begin{minipage}[t][\yonsei@sigrow][c]{\textwidth}
+    \yonsei@sizesub\bfseries
+    \noindent\hspace*{\yonsei@sigcolA}\hspace*{0.23cm}%
+    \makebox[\dimexpr\yonsei@sigcolB-0.23cm\relax][l]{#1}%
+    \hspace*{0.1cm}%
+    \makebox[\dimexpr\yonsei@sigcolC-0.1cm\relax][l]{#2}\par
+  \end{minipage}\par}
+
+\def\signpagefoot{%
+  \vfill
+  \begin{minipage}[t][3.04cm][t]{\textwidth}\centering
+    \yonsei@sizesub\bfseries
+    \@department\\
+    Graduate School\\
+    Yonsei University\\[0.2cm]
+    \@degreemonth\ \@degreeyear\par
+  \end{minipage}\par}
+
+%% ---------------------------------------------------------------------
+%% Headings
+%% ---------------------------------------------------------------------
+% 13 pt bold left-aligned heading used for Acknowledgements, List of
+% Figures, List of Tables, Abstract, References, Abstract in Korean.
+\newcommand{\frontheading}[1]{%
+  \par\noindent{\yonsei@sizesub\bfseries #1\par}\vskip 1em}
+% 16 pt bold centred heading in the style of "TABLE OF CONTENTS"
+% (used for the free-form Acknowledgements / Dedication page).
+\newcommand{\centerheading}[1]{%
+  \par{\centering\yonsei@sizechap\bfseries #1\par}\vskip 2em}
+% Regular-weight variant: the Word sample sets "References" and
+% "Abstract in Korean" in 13 pt WITHOUT bold.
+\newcommand{\frontheadingplain}[1]{%
+  \par\noindent{\yonsei@sizesub #1\par}\vskip 1em}
+
+% Bibliography heading: 13 pt regular (as in the sample), no \chapter*.
+\renewenvironment{thebibliography}[1]
+     {\clearpage\frontheadingplain{\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+
+% \chapter*{...} (List of Figures, List of Tables, References) -> 13 pt.
+\renewcommand{\@makeschapterhead}[1]{%
+  {\parindent\z@\raggedright\normalfont\yonsei@sizesub\bfseries #1\par\nobreak}%
+  \vskip 1em}
+
+% Numbered chapter: "1. Introduction" on one line, 16 pt bold.
+% Appendices: "Appendix 1. Title".
+\newif\if@yonseiappendix
+\renewcommand{\@makechapterhead}[1]{%
+  {\parindent\z@\raggedright\normalfont\yonsei@sizechap\bfseries
+    \ifnum\c@secnumdepth>\m@ne
+      \if@yonseiappendix\@chapapp~\fi\thechapter.\ %
+    \fi
+    #1\par\nobreak}%
+  \vskip 1.5em}
+
+% Every chapter starts on a new page; first paragraph is indented like
+% the others (spec D).
+\def\chapter{\clearpage\thispagestyle{plain}%
+  \global\@topnum\z@
+  \@afterindenttrue
+  \secdef\@chapter\@schapter}
+
+% Same as report.cls but the TOC line of an appendix reads
+% "Appendix 1. Title".
+\def\@chapter[#1]#2{%
+  \ifnum\c@secnumdepth>\m@ne
+    \refstepcounter{chapter}%
+    \typeout{\@chapapp\space\thechapter.}%
+    \if@yonseiappendix
+      \addcontentsline{toc}{chapter}{\protect\numberline{\@chapapp~\thechapter}#1}%
+    \else
+      \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}%
+    \fi
+  \else
+    \addcontentsline{toc}{chapter}{#1}%
+  \fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \@makechapterhead{#2}%
+  \@afterheading}
+
+\renewcommand\appendix{\par
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+  \gdef\@chapapp{Appendix}%
+  \gdef\thechapter{\@arabic\c@chapter}%
+  \@yonseiappendixtrue}
+
+% Sections: 13 pt bold ("1.1 Research background"). The Word sample
+% indents the section heading by one 13 pt character; subsections get
+% twice that, like the 2-space / 4-space steps in its table of contents.
+% The before-skip is POSITIVE on purpose: a negative value makes
+% \@startsection suppress the indent of the first paragraph, but the
+% spec indents every paragraph.
+\renewcommand\section{\@startsection{section}{1}{13pt}%
+  {3.5ex \@plus 1ex \@minus .2ex}{1.5ex \@plus .2ex}%
+  {\normalfont\yonsei@sizesub\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{26pt}%
+  {3.25ex \@plus 1ex \@minus .2ex}{1.2ex \@plus .2ex}%
+  {\normalfont\yonsei@sizesub\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{39pt}%
+  {3.25ex \@plus 1ex \@minus .2ex}{1ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\@afterindenttrue
+\renewcommand{\@afterheading}{%
+  \@nobreaktrue
+  \everypar{%
+    \if@nobreak\@nobreakfalse\clubpenalty\@M
+      \if@afterindent\else{\setbox\z@\lastbox}\fi
+    \else\clubpenalty\@clubpenalty\everypar{}\fi}}
+
+%% ---------------------------------------------------------------------
+%% Table of contents, List of Figures, List of Tables
+%% ---------------------------------------------------------------------
+% babel resets these at \begin{document}, so hook into its caption list.
+\addto\captionsenglish{%
+  \renewcommand{\contentsname}{TABLE OF CONTENTS}%
+  \renewcommand{\listfigurename}{List of Figures}%
+  \renewcommand{\listtablename}{List of Tables}%
+  \renewcommand{\bibname}{References}%
+  \renewcommand{\figurename}{Fig}%
+  \renewcommand{\tablename}{Table}%
+  \renewcommand{\appendixname}{Appendix}}
+\setcounter{tocdepth}{2}
+
+\renewcommand\tableofcontents{%
+  \clearpage\thispagestyle{plain}%
+  {\centering\yonsei@sizechap\bfseries\contentsname\par}%
+  \vskip 2em
+  \begingroup\yonsei@tocsetup\@starttoc{toc}\endgroup}
+
+% Entry lines reproduce the Word sample's table: entry text in the body
+% font (not bold), a leader of small middle dots (the sample uses U+2219
+% at 7.5 pt), and the page number centred in a 1 cm column; rows are
+% 0.78 cm apart. The same line format is used for the lists of figures
+% and tables.
+\def\yonsei@tocsetup{%
+  \setstretch{1}\normalsize\normalfont
+  \parindent\z@ \parskip\z@ \baselineskip 22pt \lineskiplimit\z@}
+\def\yonsei@tocdot{{\fontsize{7.5}{7.5}\selectfont\textperiodcentered}}
+% \yonsei@tocline{indent}{entry}{page}
+\def\yonsei@tocline#1#2#3{%
+  \par\begingroup
+    \leftskip#1\relax \rightskip\z@ \parfillskip\z@ \parindent\z@
+    \interlinepenalty\@M
+    \leavevmode #2\nobreak\hskip 0.2cm\nobreak
+    \leaders\hbox to 2.5pt{\hss\yonsei@tocdot\hss}\hfill\nobreak
+    \hskip 0.2cm\nobreak\hb@xt@ 0.6cm{\hss #3\hss}\par
+  \endgroup}
+
+% Chapter-level: "1. Introduction", "Appendix 1. Title", "References".
+\renewcommand*\l@chapter[2]{%
+  \ifnum\c@tocdepth>\m@ne
+    \begingroup\def\numberline##1{##1.\ }\yonsei@tocline{0pt}{#1}{#2}\endgroup
+  \fi}
+% Sections "2.1 Title" and subsections "2.2.1 Title", stepped in like the
+% 2-space / 4-space indents of the sample (and like the body headings).
+\renewcommand*\l@section[2]{%
+  \ifnum\c@tocdepth>\z@
+    \begingroup\def\numberline##1{##1\ }\yonsei@tocline{13pt}{#1}{#2}\endgroup
+  \fi}
+\renewcommand*\l@subsection[2]{%
+  \ifnum\c@tocdepth>\@ne
+    \begingroup\def\numberline##1{##1\ }\yonsei@tocline{26pt}{#1}{#2}\endgroup
+  \fi}
+
+% List entries "<Fig 1> Caption ...... 5" / "<Table 1> Caption ...... 5".
+\renewcommand\listoffigures{%
+  \chapter*{\listfigurename}%
+  \begingroup\yonsei@tocsetup\@starttoc{lof}\endgroup}
+\renewcommand\listoftables{%
+  \chapter*{\listtablename}%
+  \begingroup\yonsei@tocsetup\@starttoc{lot}\endgroup}
+\def\yonsei@listline#1#2#3{%
+  \begingroup\def\numberline##1{\textless#1~##1\textgreater\ }%
+  \yonsei@tocline{0pt}{#2}{#3}\endgroup}
+\renewcommand*\l@figure{\yonsei@listline{Fig}}
+\renewcommand*\l@table{\yonsei@listline{Table}}
+
+%% ---------------------------------------------------------------------
+%% Figures and tables: continuous numbering, "<Fig 1>" / "<Table 1>"
+%% ---------------------------------------------------------------------
+\RequirePackage{caption}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\DeclareCaptionLabelFormat{yonsei}{\textless#1~#2\textgreater}
+\captionsetup{labelformat=yonsei,labelsep=space,font=normalsize,justification=centering}
+% A float that ends up alone on a page sits at the top, not mid-page.
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+
+%% ---------------------------------------------------------------------
+%% Abstract pages
+%% ---------------------------------------------------------------------
+% English abstract: "Abstract" (13 pt, left) / title (13 pt, centred) /
+% body / "Keywords : ..." at the foot of the page above a full-width rule.
+\newenvironment{abstractpage}{%
+  \clearpage\thispagestyle{plain}%
+  \frontheading{Abstract}%
+  \phantomsection
+  \addcontentsline{toc}{chapter}{Abstract}%
+  {\centering\yonsei@sizesub\bfseries\@title\par}%
+  \vskip 1.5em
+  \@afterindenttrue\noindent\ignorespaces}{%
+  \par\clearpage}
+
+\newcommand{\keywords}[1]{%
+  \par\vfill
+  \noindent\rule{\textwidth}{0.4pt}\par
+  \noindent{\bfseries Keywords :}\ #1\par}
+
+% Korean abstract (inside \begin{CJK}{UTF8}{nanummj} in main.tex):
+% heading \headerkor / Korean title / body / "핵심되는 말 : ..." above a
+% full-width rule.
+\newenvironment{abstractpagekor}{%
+  \clearpage\thispagestyle{plain}%
+  \frontheadingplain{\headerkor}%
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\headerkor}%
+  {\centering\yonsei@sizesub\bfseries\titlekor\par}%  % Nanum Myeongjo Bold (moderately heavier)
+  \vskip 1.5em
+  % Korean "2칸" = two half-width spaces = one full-width character.
+  \setlength{\parindent}{1em}%
+  \@afterindenttrue\noindent\ignorespaces}{%
+  \par\clearpage}
+
+% \keywordskor{핵심되는 말}{keyword, ...} — the label is passed in from
+% back/abstract_kor.tex so that no Korean text lives in this class file.
+\newcommand{\keywordskor}[2]{%
+  \par\vfill
+  \noindent\rule{\textwidth}{0.4pt}\par
+  \noindent{\bfseries #1 :}\ #2\par}
+
+%% ---------------------------------------------------------------------
+%% Misc
+%% ---------------------------------------------------------------------
+\newcounter{savepage}            % kept for compatibility with cover.tex
+\def\Mit{Yonsei University}
+\def\MIT{YONSEI UNIVERSITY}
+
+\endinput

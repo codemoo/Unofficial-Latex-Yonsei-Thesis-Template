@@ -1,18 +1,20 @@
 {
-  "degree_level": "master",
-  "title": "Unofficial Thesis Template for Yonsei Graduate School",
-  "title_kor": "국문 타이틀",
-  "author": "John Doe",
-  "department": "School of Mechanical Engineering",
-  "degree": "Master of Mechanical Engineering",
+  "degree_level": "doctoral",
+  "title": "Unofficial Dissertation Template for Yonsei University Graduate School",
+  "title_kor": "연세대학교 일반대학원 박사학위논문 비공식 템플릿",
+  "author": "Hong, Gildong",
+  "department": "Department of Mechanical Engineering",
+  "degree": "Doctor of Philosophy in Mechanical Engineering",
   "degree_month": "February",
   "degree_year": "2026",
   "supervisors": [
-    { "name": "John Doe", "title": "Professor" }
+    { "name": "Hong, Gil-Dong", "title": "Professor" }
   ],
   "committee": [
-    { "role": "chair",  "title": "Prof.", "name": "John Doe" },
-    { "role": "member", "title": "Prof.", "name": "John Doe" },
-    { "role": "member", "title": "Prof.", "name": "John Doe" }
+    { "role": "chair",  "title": "Prof.", "name": "Hong, Gil-Dong" },
+    { "role": "member", "title": "Prof.", "name": "Lee, Na Ra" },
+    { "role": "member", "title": "Prof.", "name": "Kim, Na Ra" },
+    { "role": "member", "title": "Prof.", "name": "Kim, Dae Han" },
+    { "role": "member", "title": "Prof.", "name": "Lee, Dae Han" }
   ]
 }

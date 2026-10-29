@@ -4,53 +4,58 @@
 % Template for front/cover.tex. Rendered by scripts/render_metadata.py
 % from thesis.json. DO NOT edit front/cover.tex directly — edit
 % thesis.json and rerun the script (scripts/build.sh does this automatically).
+% (On Overleaf, where the script cannot run, edit front/cover.tex instead.)
+%
+% Page order produced here (Yonsei 2026 spec, "Order of Manuscript"):
+%   Cover page -> Title page -> Signature page -> Acknowledgements
+%   -> TABLE OF CONTENTS (page i) -> List of Figures -> List of Tables
+%   -> Abstract.  main.tex continues with the body (page 1).
 
 % Master's vs doctoral wording — driven by `degree_level` in thesis.json.
 % Used by \maketitle (mitthesis.cls) and front/signature.tex.
-\renewcommand{\thesistypetitle}{Master's Thesis}
-\renewcommand{\thesistypelower}{master's thesis}
+\renewcommand{\thesistypetitle}{Dissertation}
+\renewcommand{\thesistypelower}{dissertation}
 
-\title{Unofficial Thesis Template for Yonsei Graduate School}
-
-\author{John Doe}
-% If you wish to list previous degrees, add \prevdegrees{...} here.
-
-\department{School of Mechanical Engineering}
-
-% If the thesis is for two degrees simultaneously, list them both
-% separated by \and, e.g. \degree{Doctor of Philosophy \and Master of Science}
-\degree{Master of Mechanical Engineering}
-
+\title{Unofficial Dissertation Template for Yonsei University Graduate School}
+\author{Hong, Gildong}
+\department{Department of Mechanical Engineering}
+\degree{Doctor of Philosophy in Mechanical Engineering}
 \degreemonth{February}
 \degreeyear{2026}
 
-% If there is more than one supervisor, add multiple \supervisor lines
-% by listing several entries under "supervisors" in thesis.json.
-\supervisor{John Doe}{Professor}
+% One \supervisor line per entry in thesis.json "supervisors"; several
+% names are joined with a middle dot on the title page ("Advisor : A·B").
+\supervisor{Hong, Gil-Dong}{Professor}
 
+% Unnumbered pages must not reuse the Arabic page destinations of the body.
+\hypersetup{pageanchor=false}
 \makecover
 \maketitle
 
-\cleardoublepage
 \pagestyle{empty}
-\setcounter{savepage}{\thepage}
 \input{front/signature}
-% Once your thesis is signed, save the scan as `front/signed.pdf` and
-% uncomment the next line.
+% Once your thesis is signed, save the scan as `front/signed.pdf`,
+% comment out the \input line above and uncomment the next line.
 % \includepdf[pages={1}]{front/signed.pdf}
-\cleardoublepage
 
-\section*{Acknowledgments}
+% Dedication and/or Acknowledgements (optional; unnumbered, not counted).
+% Free-form page; the heading matches the TABLE OF CONTENTS style.
+% Any copyright permissions obtained must be listed here.
+\clearpage
+\centerheading{Acknowledgements}
 \begin{CJK}{UTF8}{nanummj}
 \input{front/acknowldgment}
 \end{CJK}
 
+% Preliminary pages carry lower-case roman numerals starting with "i"
+% on the table of contents (spec E. Page Numbers).
+\clearpage
+\pagestyle{plain}
 \pagenumbering{roman}
 \setcounter{page}{1}
+\hypersetup{pageanchor=true}
 \input{front/contents}
-\pagestyle{plain}
+
 \begin{abstractpage}
 \input{front/abstract}
 \end{abstractpage}
-
-\cleardoublepage

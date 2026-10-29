@@ -21,19 +21,15 @@
     \end{split}
   \end{equation*}
   
-  Throughout this thesis, the system parameters of the vehicle model are in Table.~\ref{table:full_car_parameters}. The spring constants and damping constants are assumed to be identical for all suspensions.
+  Throughout this thesis, the system parameters of the vehicle model are in Table~\ref{table:full_car_parameters}. The spring constants and damping constants are assumed to be identical for all suspensions.
   
   \begin{table}[ht!]
     \caption{Vehicle model parameters}
     \label{table:full_car_parameters}
-    \scriptsize%
+    \small%
     {\raggedright COM* : Center of mass \par}
     \centering%
-    \begin{tabu}{%
-        c%
-        *{7}{l}%
-        *{2}{c}%
-      }
+    \begin{tabular}{cll}
       \toprule
       Parameter& Description  & Value \\
       \midrule
@@ -59,6 +55,6 @@
       \midrule
       $c_{t}$  & Damping constant of tires & $50\;Ns/m$ \\
       \bottomrule
-    \end{tabu}
+    \end{tabular}
   
   \end{table}

@@ -1,9 +1,10 @@
-%% Bibliography. Yonsei 2026 spec sample shows this section titled
-%% "References" with a TOC entry.
-\renewcommand{\bibname}{References}
-\cleardoublepage
-\addcontentsline{toc}{chapter}{References}
+%% Bibliography. Yonsei 2026 spec: section titled "References" with a
+%% TOC entry; heading 13 pt, entries 10 pt, single spaced, IEEE style.
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
 \begin{singlespace}
-\bibliographystyle{plain}
+% entries at the body size (10 pt in the sample)
+\bibliographystyle{IEEEtran}   % IEEE style (numeric [1], [2], ...)
 \bibliography{main}
 \end{singlespace}
