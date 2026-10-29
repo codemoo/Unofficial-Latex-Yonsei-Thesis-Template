@@ -1,18 +1,14 @@
-  % -*- Mode:TeX -*-
-%% This file simply contains the commands that actually generate the table of
-%% contents and lists of figures and tables.  You can omit any or all of
-%% these files by simply taking out the appropriate command.  For more
-%% information on these files, see appendix C.3.3 of the LaTeX manual. 
-
-% Yonsei 2026 spec: heading is uppercase "TABLE OF CONTENTS"; List of
-% Figures / List of Tables / Abstract appear as TOC entries.
-\renewcommand{\contentsname}{TABLE OF CONTENTS}
+% -*- Mode:TeX -*-
+% Table of contents, List of Figures, List of Tables.
+% Yonsei 2026 spec: "TABLE OF CONTENTS" (16 pt, centred) is page i;
+% List of Figures / List of Tables / Abstract appear as TOC entries with
+% roman page numbers. Headings and entry formats live in mitthesis.cls.
 \tableofcontents
-\newpage
-\addcontentsline{toc}{chapter}{List of Figures}
+
+\clearpage
+\addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
-\newpage
-\addcontentsline{toc}{chapter}{List of Tables}
+
+\clearpage
+\addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
-
-

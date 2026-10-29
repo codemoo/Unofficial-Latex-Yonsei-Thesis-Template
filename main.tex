@@ -1,71 +1,37 @@
 % -*- Mode:TeX -*-
-
-%% IMPORTANT: The official thesis specifications are available at:
-%%            http://libraries.mit.edu/archives/thesis-specs/
+%% Yonsei University Graduate School thesis — root document.
+%% Layout follows the official 2026 English doctoral Word sample
+%% ("영문 MSword_박사학위논문_양식_2026.docx"). Per-thesis metadata lives
+%% in thesis.json (rendered into front/cover.tex, signature.tex and
+%% titlekor.tex by scripts/build.sh). On Overleaf edit those three files.
 %%
-%%            Please verify your thesis' formatting and copyright
-%%            assignment before submission.  If you notice any
-%%            discrepancies between these templates and the 
-%%            MIT Libraries' specs, please let us know
-%%            by e-mailing thesis@mit.edu
+%% Page order (spec "Order of Manuscript"):
+%%   Cover / Title / Signature / Acknowledgements / TABLE OF CONTENTS (i)
+%%   / List of Figures / List of Tables / Abstract / Text (1, 2, 3 ...)
+%%   / Appendices / References / Abstract in Korean
 
-%% The documentclass options along with the pagestyle can be used to generate
-%% a technical report, a draft copy, or a regular thesis.  You may need to
-%% re-specify the pagestyle after you \include  cover.tex.  For more
-%% information, see the first few lines of mitthesis.cls. 
+\documentclass[10pt]{mitthesis}   % 10pt (as in the Word sample) or 11pt per spec
 
-%\documentclass[12pt,vi,twoside]{mitthesis}
-%%
-%%  If you want your thesis copyright to you instead of MIT, use the
-%%  ``vi'' option, as above.
-%%
-%\documentclass[12pt,twoside,leftblank]{mitthesis}
-%%
-%% If you want blank pages before new chapters to be labelled ``This
-%% Page Intentionally Left Blank'', use the ``leftblank'' option, as
-%% above. 
-
-\documentclass[11pt,a4paper]{mitthesis}
-\setlength{\footskip}{30pt}
-
-\usepackage{lgrind}
-%% These have been added at the request of the MIT Libraries, because
-%% some PDF conversions mess up the ligatures.  -LB, 1/22/2014
-\usepackage{cmap}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{tabu}  % assumes amsmath package installed
-\usepackage{booktabs,caption}                  % only used for the table example
-\usepackage{caption}
-\usepackage{pdfpages}
-
-\usepackage{mwe}
+%% NOTE: mitthesis.cls already loads amsmath, amsthm, newtxtext/newtxmath
+%% (Times), caption, geometry, setspace, CJKutf8 and babel. Do NOT load
+%% amssymb/amsfonts — newtxmath provides those symbols.
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{siunitx}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{siunitx}
-\usepackage{multirow}
-
+\usepackage{pdfpages}             % for the signed signature scan
 \usepackage{xspace}
-
-\pagestyle{plain}
-
-%% This bit allows you to either specify only the files which you wish to
-%% process, or `all' to process all files which you \include.
-%% Krishna Sethuraman (1990).
-
-% \typein [\files]{Enter file names to process, (chap1,chap2 ...), or `all' to
-% process all files:}
-% \def\all{all}
-% \ifx\files\all \typeout{Including all files.} \else \typeout{Including only \files.} \includeonly{\files} \fi
+\usepackage[hidelinks]{hyperref}  % load last
 
 \begin{document}
 
-
-
+%% Front matter (front/cover.tex): cover, title, signature,
+%% acknowledgements, TOC, lists, abstract.
 \include{front/cover}
-% Some departments (e.g. 5) require an additional signature page.  See
-% signature.tex for more information and uncomment the following line if
-% applicable.
+
+%% Body text: arabic page numbers restart at 1.
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
@@ -73,24 +39,22 @@
 \include{chapters/chap2}
 % \include{chapters/chap3}
 % \include{chapters/chap4}
-% \include{chapters/chap5}
 \include{back/conclusion}
 
-% \appendix
+%% Appendices (if any): numbered "Appendix 1", "Appendix 2", ...
+\appendix
 \include{back/appa}
-% \include{back/appb}
+\include{back/appb}
 
+%% References
 \include{biblio}
 
+%% Abstract in Korean (two pages or less)
 \begin{CJK}{UTF8}{nanummj}
-
 \input{front/titlekor}
 \begin{abstractpagekor}
-    
-    % \input{front/abstract}
-    \input{back/abstract_kor}
-
+\input{back/abstract_kor}
 \end{abstractpagekor}
 \end{CJK}
-\end{document}
 
+\end{document}
