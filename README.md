@@ -1,95 +1,173 @@
-# 연세대 일반대학원 학위논문 LaTeX 템플릿 (비공식, 2026 양식)
-# Unofficial Yonsei Graduate School Thesis LaTeX Template (2026 spec)
+# Unofficial Yonsei Graduate School Thesis LaTeX Template
 
-연세대학교 일반대학원 학위논문용 비공식 LaTeX 템플릿. 공식 Word 양식
-**`영문 MSword_박사학위논문_양식_2026.docx`**(2026-03-30 공지)의 페이지 구성·여백·글꼴
-크기·문구를 그대로 따르도록 `mitthesis.cls`를 작성했다. 기본값은 **박사** 양식이며
-`thesis.json` 한 줄로 석사로 전환된다. 로컬 스크립트 빌드와 **Overleaf 업로드** 모두 지원.
+English | [한국어](README.ko.md)
 
-Unofficial LaTeX template for Yonsei University Graduate School theses, following the
-official Word sample **`영문 MSword_박사학위논문_양식_2026.docx`** (announced 2026-03-30)
-page by page. Doctoral layout by default; one line in `thesis.json` switches to master's.
-Builds locally via `scripts/build.sh` or on **Overleaf** as is.
+A LaTeX template for **English-language theses and dissertations at Yonsei
+University Graduate School**, with a Korean abstract. The layout targets the
+2026 English doctoral Word sample, `영문 MSword_박사학위논문_양식_2026.docx`,
+distributed with the March 30, 2026 format announcement.
 
----
+The included example uses the **doctoral** layout. A master's configuration is
+also supported by changing the degree level, degree name and committee list.
+Build locally or upload the source to Overleaf.
 
-## 시작하기 / Quick start
+This is an **unofficial** template, not a guarantee of submission acceptance.
+Check the latest Graduate School instructions and inspect your final PDF,
+especially after changing titles, names or content length.
 
-**로컬 빌드 (권장)**
+## Quick start
 
-1. TeX Live 또는 MacTeX (`newtx`, `caption`, `geometry`, `cjk`, 한국어 폰트 `texlive-lang-korean`/Nanum 포함 — texlive-full 권장), `python3` 3.8+, 미리보기용 `poppler`. 로컬 TeX가 없으면 `docker pull texlive/texlive:latest` 만 해두면 `scripts/build.sh`가 컨테이너 안에서 빌드한다.
-2. `thesis.json` 편집 — 제목, 저자, 학과, 학위, 지도교수(`supervisors[]`), 인준 위원(`committee[]`), 졸업월/연도, `degree_level`. 위원 수(박사 5 / 석사 3)와 직함 통일(`Prof.`/`Dr.`), 제출월(February/August)은 빌드 시 자동 검증.
-3. `scripts/build.sh` — `front/cover.tex`·`signature.tex`·`titlekor.tex`를 렌더한 뒤 `latexmk` 실행. 에러·주요 경고만 출력.
-4. `scripts/preview.sh 1-5` 로 표지/제목/인준/감사의 글/차례를 PNG로 확인.
+### Local build
 
-**Overleaf**
+Install Python 3.8+ and a TeX distribution with pdfLaTeX and BibTeX; `latexmk` is
+recommended. Full MacTeX or TeX Live installations include the required packages
+(`newtx`, `caption`, `geometry`, `CJKutf8`, and Nanum Myeongjo TeX fonts).
+On Debian/Ubuntu, `texlive-full` is the simplest option; smaller installations
+also need Korean support such as `texlive-lang-korean`.
+Install Poppler (`brew install poppler` or `apt install poppler-utils`) for previews.
 
-1. 이 폴더를 zip으로 묶어 **New Project → Upload Project**. Main document `main.tex`, Compiler **pdfLaTeX**, TeX Live 2023 이상.
-2. Overleaf에서는 스크립트를 쓸 수 없으므로 `thesis.json` 대신 생성 파일 `front/cover.tex`(제목·저자·학위·지도교수), `front/signature.tex`(인준 위원), `front/titlekor.tex`(국문 제목)를 직접 편집한다.
+```sh
+git clone https://github.com/codemoo/Unofficial-Latex-Yonsei-Thesis-Template.git
+cd Unofficial-Latex-Yonsei-Thesis-Template
+# Edit thesis.json and replace the example text before building.
+scripts/build.sh
+scripts/preview.sh 1-5
+```
 
-**Local build (recommended)**
+The build regenerates `front/cover.tex`, `front/signature.tex` and
+`front/titlekor.tex` from `thesis.json` and the `.in` templates, then creates
+`main.pdf`. It prints errors and selected warnings; also inspect `main.log` and
+the PDF, because the filtered output does not catch every layout problem.
+Previews are saved in `preview/`. Omit the range to render all pages, or pass a
+single page number.
 
-1. TeX Live or MacTeX (needs `newtx`, `caption`, `geometry`, `cjk` and Korean fonts — texlive-full recommended), `python3` 3.8+, `poppler` for previews. Without a local TeX, `docker pull texlive/texlive:latest` is enough: `scripts/build.sh` builds inside the container.
-2. Edit `thesis.json` — title, author, department, degree, `supervisors[]`, `committee[]`, month/year, `degree_level`. Committee size (5 doctoral / 3 master), title consistency (`Prof.`/`Dr.`) and submission month (February/August) are validated at build time.
-3. `scripts/build.sh` renders `front/cover.tex`, `signature.tex`, `titlekor.tex` and runs `latexmk`, printing only errors and key warnings.
-4. `scripts/preview.sh 1-5` rasterises the cover / title / signature / acknowledgements / TOC pages.
+### Docker alternative
 
-**Overleaf**
+Python is still required on the host for metadata generation. With Docker
+installed and running:
 
-1. Zip the folder and upload it (**New Project → Upload Project**); main document `main.tex`, compiler **pdfLaTeX**, TeX Live 2023 or newer.
-2. The scripts cannot run on Overleaf, so edit the generated files directly instead of `thesis.json`: `front/cover.tex` (title, author, degree, advisor), `front/signature.tex` (committee), `front/titlekor.tex` (Korean title).
+```sh
+docker pull texlive/texlive:latest
+USE_DOCKER=1 scripts/build.sh
+```
 
----
+The build automatically uses an already-downloaded image when neither `latexmk`
+nor `pdflatex` is available locally. `TEXLIVE_IMAGE` selects another compatible
+image; Poppler previews run on the host. For reproducibility, pin your TeX Live
+version or image digest rather than relying indefinitely on `latest`.
 
-## 어디를 고치나 / What to edit
+### Overleaf
 
-| 내용 / Item | 파일 / File |
+1. Download the repository via **Code → Download ZIP**, then choose
+   **New Project → Upload Project** in Overleaf.
+2. Set the main document to `main.tex`, compiler to **pdfLaTeX**, and TeX Live to
+   2023 or newer.
+3. Overleaf does not run the metadata scripts. Edit `front/cover.tex` for the
+   title, author, degree, dates and advisors; `front/signature.tex` for the
+   committee; and `front/titlekor.tex` for the Korean title.
+4. Replace the example chapters and abstracts, compile, and inspect the PDF.
+
+Before returning to local builds, copy metadata changes back into `thesis.json`
+and structural changes into the `.in` templates. Otherwise the local build will
+overwrite your edits to those three generated files.
+
+## Metadata and degree options
+
+[`thesis.json`](thesis.json) is the local source of truth for front-matter metadata.
+
+| Field | Meaning and constraints |
 |---|---|
-| 제목, 저자, 학과, 학위명, 제출 월/연도, 지도교수 / title, author, department, degree, month/year, advisor(s) | `thesis.json` (Overleaf: `front/cover.tex`) |
-| 석사 ↔ 박사 / master's ↔ doctoral | `thesis.json` `degree_level` + `committee[]` 3↔5인 + `degree` (Overleaf: `front/cover.tex`의 `\thesistypetitle`/`\thesistypelower`, `front/signature.tex`) |
-| 인준 위원 (박사 5인 / 석사 3인) / committee (5 doctoral / 3 master's) | `thesis.json` `committee[]` `{role, title, name}` (Overleaf: `front/signature.tex` — `\signature{Committee Chair}{Prof. Name}` 한 줄씩) |
-| 서명본 스캔 삽입 / signed scan | `front/signed.pdf` 저장 후 `front/cover.tex.in`(Overleaf: `front/cover.tex`)에서 `\input{front/signature}` 주석 처리, `\includepdf` 주석 해제 |
-| 감사의 글 / acknowledgements | `front/acknowldgment.tex` (파일명 오타는 의도적, 바꾸지 말 것) |
-| 영문 초록 / English abstract | `front/abstract.tex` — 마지막에 `\keywords{…}` |
-| 국문 제목 / Korean title | `thesis.json` `title_kor` (Overleaf: `front/titlekor.tex`) |
-| 국문 초록 / Korean abstract | `back/abstract_kor.tex` — 마지막에 `\keywordskor{핵심되는 말}{…}` |
-| 본문 챕터 / chapters | `chapters/chapN.tex` (`\chapter{…}`로 시작) 후 `main.tex`의 `\include` 목록에 추가 |
-| 부록 / appendices | `back/appN.tex`, `main.tex`의 `\appendix` 뒤에 `\include` → `Appendix 1. …`로 출력 |
-| 참고문헌 / references | `main.bib` (IEEE 스타일 `IEEEtran`; 변경은 `biblio.tex`) |
-| 본문 글자 크기 10pt ↔ 11pt | `main.tex` 첫 줄 `\documentclass[10pt]{mitthesis}` |
+| `title`, `title_kor`, `author` | English/Korean titles and author name. |
+| `department`, `degree` | Full department and degree names, including `Department of …` where appropriate. |
+| `degree_level` | `doctoral` in the example, or `master`. Set explicitly; omitting it defaults to `master` for compatibility. |
+| `degree_month`, `degree_year` | Graduation month and year. Only `February` or `August` is accepted. |
+| `supervisors` | Nonempty list of `{ "name": "…", "title": "Professor" }`. The title page prints names, joined with a middle dot for multiple advisors. |
+| `committee` | Five entries for doctoral, three for master's. Each has `role`, `title`, and a nonempty `name`; first role `chair`, all others `member`. |
 
----
+Committee titles must all be `Prof.`, all `Dr.`, or all empty strings for
+names-only output. The renderer validates committee count, roles, title
+consistency, degree level and month. Metadata is inserted as LaTeX: escape
+special characters such as `&` as `\&` (written `\\&` inside JSON).
 
-## 2026 양식 반영 사항 / Spec compliance
+To switch to **master's**, update all three:
 
-- **페이지 순서 / order**: Cover → Title → Signature → Acknowledgements → TABLE OF CONTENTS(i) → List of Figures → List of Tables → Abstract → 본문(1, 2, 3 …) → Appendices → References → Abstract in Korean
-- **용지·여백 / margins**: A4, 위/아래 5.3cm, 좌/우 3.5cm, 쪽번호 하단 중앙(용지 끝 3.2cm). 표지 제목 6.8cm, 제목 페이지 6.1cm 시작 — Word 표 행 높이 그대로 재현
-- **글꼴 / fonts**: Times (newtx). 표지 18pt, 제목 페이지 16pt, 인준서 13pt, 챕터 `1. Introduction` 16pt, 소제목 `1.1 …` 13pt, 본문 10–11pt, 각주 9pt, 행간 1.5, 2칸 들여쓰기, 양쪽 정렬
-- **Title page**: `Advisor : 이름·이름`, `A Dissertation Submitted / to the Department of … / and the Committee of the Graduate School / of Yonsei University in Partial Fulfillment of the / Requirements for the Degree of / Doctor of …`, 저자, `February 2026`
-- **Signature page**: `This certifies that the dissertation / of NAME is approved.`, 위원별 서명선 + `Committee Chair | Prof. Name` (열 폭 1/4.5/7.5/1cm), 하단 학과·Graduate School·Yonsei University·제출월. 직함은 `Prof.`/`Dr.` 중 하나로 통일하거나 생략
-- **TOC**: `TABLE OF CONTENTS` 16pt 중앙, Word 표와 같은 작은 점 리더 + 중앙 정렬 쪽번호 열, `1. Introduction`, `2.1 …`, `Appendix 1. …`, `References`, `Abstract in Korean` (굵게 없음)
-- **List of Figures / Tables**: `<Fig 1> …`, `<Table 1> …` (전체 일련번호, 본문 캡션 동일)
-- **Abstract**: `Abstract` → 제목 → 본문 → 괘선 + `Keywords : …`; **Abstract in Korean**(보통 굵기) → 국문 제목(나눔명조 Bold) → 본문 → 괘선 + `핵심되는 말 : …` (국문 논문이면 `\renewcommand{\headerkor}{국문 요약}`)
-- **References**: 제목 13pt(보통 굵기, 양식과 동일), 항목 10pt 단일 행간, IEEE 스타일 (`[1]`, `[2]` 번호 인용)
-- **제출월**: February 또는 August
+1. Set `degree_level` to `master`.
+2. Set `degree` to the appropriate name, e.g. `Master of Science in Mechanical Engineering`.
+3. Use three committee members: one chair and two members.
 
----
+On Overleaf, change the following in `front/cover.tex`, also update `\degree{…}`,
+and keep three `\signature{role}{name}` entries in `front/signature.tex`:
 
-## 주의사항 / Notes
+```tex
+\renewcommand{\thesistypetitle}{Master's Thesis}
+\renewcommand{\thesistypelower}{master's thesis}
+```
 
-- `front/cover.tex`, `front/signature.tex`, `front/titlekor.tex`는 `scripts/build.sh`가 `thesis.json`에서 **자동 생성**한다. 로컬 빌드 시 직접 고치면 덮어쓰이므로 `thesis.json`이나 `.in` 템플릿을 고칠 것 (Overleaf 전용이면 생성 파일을 직접 편집).
-  Those three files are **generated** from `thesis.json` by `scripts/build.sh`; edit `thesis.json` or the `.in` templates (or the generated files when working only on Overleaf).
+Review the applicable master's sample before submission.
 
-- `mitthesis.cls`가 `amsmath`, `amsthm`, `newtxtext`/`newtxmath`, `caption`, `geometry`, `setspace`, `CJKutf8`, `babel`을 이미 로드한다. `amssymb`/`amsfonts`는 `newtxmath`와 충돌하므로 추가하지 말 것.
-  `mitthesis.cls` already loads those packages; do not add `amssymb`/`amsfonts` (they clash with `newtxmath`).
-- 한국어는 `\begin{CJK}{UTF8}{nanummj} … \end{CJK}` 안에서만 쓴다 (`main.tex`의 국문 초록 블록, 감사의 글은 이미 감싸져 있음).
-  Korean text must sit inside a CJK environment (the Korean abstract and acknowledgements already are).
-- 부록은 Word 양식의 "Order of Manuscript" 규정대로 References 앞에 둔다. 뒤로 보내려면 `main.tex`에서 `\include{biblio}`와 부록 블록 순서만 바꾸면 된다.
-  Appendices precede References per the spec's "Order of Manuscript"; swap the two blocks in `main.tex` if your department wants the reverse.
+## What to edit
 
-## 라이선스 / License
+| Content | File or action |
+|---|---|
+| Front-matter metadata | `thesis.json`; Overleaf alternatives are described above. |
+| Acknowledgements | `front/acknowldgment.tex`. Update its example author/date separately; retain the filename used by the template. |
+| English abstract | `front/abstract.tex`, ending with `\keywords{…}`. |
+| Korean abstract | `back/abstract_kor.tex`, ending with `\keywordskor{핵심되는 말}{…}`. |
+| Chapters | `chapters/chapN.tex`, starting with `\chapter{…}`; add an `\include` in `main.tex`. |
+| Conclusion | `back/conclusion.tex`. |
+| Appendices | `back/appN.tex`; include after `\appendix` in `main.tex`, producing `Appendix 1. …`. |
+| References | `main.bib`; style is selected in `biblio.tex` (default: `IEEEtran`). |
+| Body size | `\documentclass[10pt]{mitthesis}` in `main.tex`; 11pt is also supported. |
+| Shared layout | `mitthesis.cls`; check the official sample before changing layout rules. |
 
-MIT — see [`LICENSE`](LICENSE). Inherited from the upstream MIT thesis template.
+For a signed approval-page scan, save it as `front/signed.pdf`. In
+`front/cover.tex.in` (or `front/cover.tex` on Overleaf), comment out
+`\input{front/signature}` and uncomment the supplied `\includepdf` line.
+Do not publish personal signatures in a public repository.
 
-이 템플릿은 **비공식**이다. 최종 제출 전 반드시 일반대학원 행정실에 양식 일치 여부를 확인할 것.
-This template is **unofficial**. Always verify formatting compliance with the Graduate School administration before final submission.
+## Layout implemented
+
+- Order: cover, title, signature, optional acknowledgements, table of contents,
+  list of figures, list of tables, English abstract, body, appendices, references,
+  Korean abstract.
+- A4; top/bottom margins 5.3 cm, left/right margins 3.5 cm; centered page-number
+  baseline 3.2 cm from the bottom edge.
+- Times-style text and mathematics via `newtx` (a Times-compatible family, not
+  the proprietary Times New Roman font itself); Nanum Myeongjo for Korean text.
+- Cover title 18pt; title-page/chapter headings 16pt; section headings 13pt;
+  body 10pt or 11pt; footnotes 9pt. Body line-spacing multiplier 1.5 and 2em
+  paragraph indentation; Korean abstract indentation 1em.
+- Degree-specific submission/approval wording, five doctoral or three master's
+  signature rows; advisors listed as `Advisor : Name1·Name2`.
+- Roman numbering starts at the contents; Arabic numbering restarts at chapter 1.
+  Cover through acknowledgements have no printed page numbers.
+- Dot-leader contents and lists; headings such as `1. Introduction`; continuous
+  figure/table numbering with `<Fig 1>` and `<Table 1>` captions.
+- Abstracts with title, body, horizontal rule and keywords; numeric IEEE citations
+  and single-spaced reference entries.
+
+The target sample is for an English dissertation. Changing `\headerkor` to
+`국문 요약` changes only the Korean abstract heading, not the whole thesis format.
+
+## Before submitting
+
+Inspect the full PDF, not only the first five pages. Check long titles, advisor
+and committee names, page order, numbering, figure/table lists, references, Korean
+glyphs and clickable contents. Replace all placeholder text and dates.
+
+The class already loads `amsmath`, `amsthm`, `newtxtext`, `newtxmath`, `caption`,
+`geometry`, `setspace`, `CJKutf8` and `babel`. Do not add `amssymb` or `amsfonts`;
+they conflict with the existing math setup. Korean text belongs inside
+`\begin{CJK}{UTF8}{nanummj} … \end{CJK}`; the supplied Korean abstract and
+acknowledgements already provide this environment.
+
+See [AGENTS.md](AGENTS.md) for the implementation map and generated-file rules.
+Official Graduate School instructions take precedence over this template.
+
+## License and attribution
+
+[`LICENSE`](LICENSE) contains the **LaTeX Project Public License 1.3c**.
+[`mitthesis.cls`](mitthesis.cls) also retains the original MIT thesis class's
+copyright and permission notice, including its restriction on copies made or
+distributed for resale. Read both notices before redistribution. The template's
+MIT origin is not a claim that it uses the MIT software license.

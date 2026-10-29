@@ -1,13 +1,30 @@
 %% mitthesis.cls — Yonsei University Graduate School thesis class
 %%
 %% Originally derived from the MIT thesis class (Stephen Gildea, Peter
-%% Nuth, Krishna Sethuraman; (c) 1987-1990, permission to copy granted
-%% provided the notice is retained). Rewritten for the Yonsei University
+%% Nuth, Krishna Sethuraman; original notice retained below).
+%% Rewritten for the Yonsei University
 %% Graduate School 2026 thesis format, following the official Word sample
 %% "영문 MSword_박사학위논문_양식_2026.docx" (doctoral, English thesis).
 %%
 %% The file keeps its historical name so that main.tex and the build
 %% scripts stay unchanged.
+%%
+% Documentclass options (vi and upcase) and changes to copyright notice
+%	Copyright (c) 1990, by Krishna Sethuraman.
+%
+% Pagestyle and header generation
+%	Copyright (c) 1987, 1988 by Peter Nuth
+%
+% Original version
+%	 Copyright (c) 1987 by Stephen Gildea
+% Permission to copy all or part of this work is granted, provided
+% that the copies are not made or distributed for resale, and that
+% the copyright notice and this notice are retained.
+%
+% THIS WORK IS PROVIDED ON AN "AS IS" BASIS.  THE AUTHOR PROVIDES NO
+% WARRANTY WHATSOEVER, EITHER EXPRESS OR IMPLIED, REGARDING THE WORK,
+% INCLUDING WARRANTIES WITH RESPECT TO ITS MERCHANTABILITY OR FITNESS
+% FOR ANY PARTICULAR PURPOSE.
 %%
 %% What the official 2026 spec says (and where it is enforced here):
 %%   - A4 paper, Times New Roman ............... geometry / newtx below
@@ -453,6 +470,7 @@
 \newenvironment{abstractpage}{%
   \clearpage\thispagestyle{plain}%
   \frontheading{Abstract}%
+  \phantomsection
   \addcontentsline{toc}{chapter}{Abstract}%
   {\centering\yonsei@sizesub\bfseries\@title\par}%
   \vskip 1.5em
@@ -470,6 +488,7 @@
 \newenvironment{abstractpagekor}{%
   \clearpage\thispagestyle{plain}%
   \frontheadingplain{\headerkor}%
+  \phantomsection
   \addcontentsline{toc}{chapter}{\headerkor}%
   {\centering\yonsei@sizesub\bfseries\titlekor\par}%  % Nanum Myeongjo Bold (moderately heavier)
   \vskip 1.5em

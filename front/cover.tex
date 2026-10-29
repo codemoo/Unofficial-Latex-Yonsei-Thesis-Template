@@ -27,6 +27,8 @@
 % names are joined with a middle dot on the title page ("Advisor : A·B").
 \supervisor{Hong, Gil-Dong}{Professor}
 
+% Unnumbered pages must not reuse the Arabic page destinations of the body.
+\hypersetup{pageanchor=false}
 \makecover
 \maketitle
 
@@ -51,6 +53,7 @@
 \pagestyle{plain}
 \pagenumbering{roman}
 \setcounter{page}{1}
+\hypersetup{pageanchor=true}
 \input{front/contents}
 
 \begin{abstractpage}
