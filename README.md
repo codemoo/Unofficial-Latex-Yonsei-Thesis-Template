@@ -135,8 +135,13 @@ Do not publish personal signatures in a public repository.
 - Times-style text and mathematics via `newtx` (a Times-compatible family, not
   the proprietary Times New Roman font itself); Nanum Myeongjo for Korean text.
 - Cover title 18pt; title-page/chapter headings 16pt; section headings 13pt;
-  body 10pt or 11pt; footnotes 9pt. Body line-spacing multiplier 1.5 and 2em
-  paragraph indentation; Korean abstract indentation 1em.
+  body 10pt or 11pt; footnotes 9pt; 2em paragraph indentation; Korean abstract
+  indentation 1em.
+- Line pitch of the Word sample (measured from the sample rendered to PDF):
+  body at Word multiple 1.2 (13.8pt at 10pt, 15.2pt at 11pt); English and Korean
+  abstracts and references 10pt at multiple 1.15 (13.2pt); contents and list
+  entries 10pt. The class option `doublespace` restores the earlier 1.5 stretch.
+  Keyword lines break between words only.
 - Degree-specific submission/approval wording, five doctoral or three master's
   signature rows; advisors listed as `Advisor : Name1·Name2`.
 - Roman numbering starts at the contents; Arabic numbering restarts at chapter 1.

@@ -31,7 +31,8 @@
 %%   - Margins: top/bottom 5.3 cm, left/right 3.5 cm,
 %%     header 1.5 cm, footer 3.2 cm ............ geometry below
 %%   - Main title 18 pt bold, subheadings 13 pt bold, body 10-11 pt,
-%%     footnotes 9 pt, 1.5 line spacing ........ sizes / setspace below
+%%     footnotes 9 pt; line pitch of the 2026 Word sample (body
+%%     multiple 1.2, abstracts/references 1.15) . setspace below
 %%   - Paragraphs indented 2 spaces, justified . \parindent below
 %%   - Page numbers centred at the bottom ...... pagestyle plain
 %%   - Cover page (title 6.8 cm from top) ...... \makecover
@@ -68,14 +69,17 @@
 %%   \titlekor  — Korean title, defined by front/titlekor.tex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mitthesis}[2026/10/29 Yonsei University Graduate School thesis (2026 spec)]
+\ProvidesClass{mitthesis}[2026/11/17 Yonsei University Graduate School thesis (2026 spec)]
 
 %% ---------------------------------------------------------------------
 %% Options
 %% ---------------------------------------------------------------------
+% Default: the body line pitch of the 2026 Word sample (set after the class
+% loads, from the font size). [doublespace] keeps the earlier 1.5 stretch.
+\newif\ifyonsei@wordpitch \yonsei@wordpitchtrue
 \def\yonsei@stretch{1.5}
-\DeclareOption{doublespace}{\def\yonsei@stretch{1.5}}
-\DeclareOption{singlespace}{\def\yonsei@stretch{1}}
+\DeclareOption{doublespace}{\yonsei@wordpitchfalse\def\yonsei@stretch{1.5}}
+\DeclareOption{singlespace}{\yonsei@wordpitchfalse\def\yonsei@stretch{1}}
 % Accepted for backward compatibility; they have no effect any more.
 \DeclareOption{vi}{}
 \DeclareOption{upcase}{}
@@ -84,6 +88,14 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions\relax
 \LoadClass[a4paper,oneside]{report}
+% Word "multiple 1.2" on Times New Roman (single line = 1.15 em) is a pitch of
+% 1.38 x the font size: 13.8 pt at 10 pt, 15.18 pt at 11 pt, 16.56 pt at 12 pt.
+% Divided by the report baselineskip (12 / 13.6 / 14.5 pt) this is the stretch.
+\ifyonsei@wordpitch
+  \ifcase\@ptsize\relax \def\yonsei@stretch{1.15}%
+  \or \def\yonsei@stretch{1.116}%
+  \else \def\yonsei@stretch{1.142}\fi
+\fi
 
 %% ---------------------------------------------------------------------
 %% Fonts: Times New Roman look-alike (newtx) with matching maths.
@@ -118,6 +130,16 @@
                                   % (the Word sample uses 2 characters = 20 pt at 10 pt)
 \setlength{\parskip}{0pt}
 \renewcommand{\footnotesize}{\fontsize{9}{11}\selectfont}
+
+%% Float placement for the tighter Word-sample pitch: a page of floats only
+%% must be at least 80% full, so a single half-page figure joins the text on
+%% the next page instead of leaving a half-empty float page.
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.5}
+\renewcommand{\textfraction}{0.10}
+\renewcommand{\floatpagefraction}{0.80}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{4}
 
 %% Heading font sizes
 \newcommand{\yonsei@sizecover}{\fontsize{18}{24}\selectfont}   % cover title etc.
@@ -292,6 +314,8 @@
 % Bibliography heading: 13 pt regular (as in the sample), no \chapter*.
 \renewenvironment{thebibliography}[1]
      {\clearpage\frontheadingplain{\bibname}%
+      % 10 pt entries at Word multiple 1.15 (13.2 pt pitch), as in the sample
+      \setstretch{1}\fontsize{10}{13.2}\selectfont
       \list{\@biblabel{\@arabic\c@enumiv}}%
            {\settowidth\labelwidth{\@biblabel{#1}}%
             \leftmargin\labelwidth
@@ -408,7 +432,7 @@
 % 0.78 cm apart. The same line format is used for the lists of figures
 % and tables.
 \def\yonsei@tocsetup{%
-  \setstretch{1}\normalsize\normalfont
+  \setstretch{1}\fontsize{10}{12}\normalfont\selectfont  % 10 pt entries, as in the sample
   \parindent\z@ \parskip\z@ \baselineskip 22pt \lineskiplimit\z@}
 \def\yonsei@tocdot{{\fontsize{7.5}{7.5}\selectfont\textperiodcentered}}
 % \yonsei@tocline{indent}{entry}{page}
@@ -469,6 +493,8 @@
 % body / "Keywords : ..." at the foot of the page above a full-width rule.
 \newenvironment{abstractpage}{%
   \clearpage\thispagestyle{plain}%
+  % 10 pt at Word multiple 1.15 (1.15 x 1.15 x 10 pt = 13.2 pt pitch)
+  \setstretch{1}\fontsize{10}{13.2}\selectfont
   \frontheading{Abstract}%
   \phantomsection
   \addcontentsline{toc}{chapter}{Abstract}%
@@ -480,13 +506,16 @@
 \newcommand{\keywords}[1]{%
   \par\vfill
   \noindent\rule{\textwidth}{0.4pt}\par
-  \noindent{\bfseries Keywords :}\ #1\par}
+  % ragged right without hyphenation: a keyword is never split across lines
+  {\raggedright\hyphenpenalty\@M\noindent{\bfseries Keywords :}\ #1\par}}
 
 % Korean abstract (inside \begin{CJK}{UTF8}{nanummj} in main.tex):
 % heading \headerkor / Korean title / body / "핵심되는 말 : ..." above a
 % full-width rule.
 \newenvironment{abstractpagekor}{%
   \clearpage\thispagestyle{plain}%
+  % Nanum Myeongjo also has a 1.15 em line, so the same 13.2 pt pitch.
+  \setstretch{1}\fontsize{10}{13.2}\selectfont
   \frontheadingplain{\headerkor}%
   \phantomsection
   \addcontentsline{toc}{chapter}{\headerkor}%
@@ -502,7 +531,7 @@
 \newcommand{\keywordskor}[2]{%
   \par\vfill
   \noindent\rule{\textwidth}{0.4pt}\par
-  \noindent{\bfseries #1 :}\ #2\par}
+  {\raggedright\hyphenpenalty\@M\noindent{\bfseries #1 :}\ #2\par}}
 
 %% ---------------------------------------------------------------------
 %% Misc

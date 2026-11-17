@@ -92,7 +92,7 @@ Before changing anything here, re-check the sample
 | Page order: Cover / Title / Signature / Acknowledgements / TOC / LoF / LoT / Abstract / Text / Appendices / References / Abstract in Korean | `front/cover.tex.in` then `main.tex` |
 | A4; margins top/bottom 5.3 cm, L/R 3.5 cm; page number centred, 3.2 cm from paper edge | `mitthesis.cls` `geometry` options (`footskip=2.1cm`) |
 | Times New Roman | `mitthesis.cls` `newtxtext`/`newtxmath` |
-| Body 10 or 11 pt, 1.5 line spacing, 2-space paragraph indent (2em; Korean abstract 1em), justified; footnotes 9 pt | `main.tex` class option; `mitthesis.cls` `\setstretch`, `\parindent`, `\footnotesize` |
+| Body 10 or 11 pt at the Word sample's line pitch (multiple 1.2; abstracts and references 10 pt at 1.15; contents/list entries 10 pt; `doublespace` = old 1.5), 2-space paragraph indent (2em; Korean abstract 1em), justified; footnotes 9 pt | `main.tex` class option; `mitthesis.cls` `\setstretch`, `\parindent`, `\footnotesize` |
 | Cover: title 18 pt bold at 6.8 cm; author; `Department / Graduate School / Yonsei University` at the bottom (rows 1.5/4.75/3.85/8.9 cm) | `mitthesis.cls` `\makecover` |
 | Title page: 16 pt bold; title at 6.1 cm; `Advisor : A·B`; `A Dissertation Submitted … Requirements for the Degree of …`; author; month year (rows 0.8/3.4/1.2/1.0/6.0/1.7/3.7/1.0 cm) | `mitthesis.cls` `\maketitle` + `\supervisor` accumulator; wording from `\thesistypetitle` |
 | Submission month February or August only | `scripts/render_metadata.py` |
@@ -155,7 +155,10 @@ Before changing anything here, re-check the sample
   absorbs overflow from a long title or degree name. If a page still
   spills, shorten the title before touching the row heights.
 - **`\keywords` / `\keywordskor`** end the abstracts; they `\vfill` to the
-  foot of the page, so put nothing after them.
+  foot of the page, so put nothing after them. Keep keywords within ten words.
+- **Floats after `\chapter`**: avoid `[t!]` on a float placed right after a
+  chapter heading; `!` overrides the chapter page's top-float block and the
+  float can print above the heading. Use `[tbp]`.
 - **Overleaf**: the scripts cannot run there, so users edit the generated
   `front/cover.tex`, `front/signature.tex`, `front/titlekor.tex` directly.
   Keep those files committed and compilable.
